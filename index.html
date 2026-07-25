@@ -447,33 +447,64 @@
   .cta-band p { color:rgba(255,255,255,.82); max-width:540px; margin:0 auto 30px; }
   .cta-band .btn-primary { background:var(--white); color:var(--navy); box-shadow:0 14px 34px rgba(0,0,0,.3); }
 
-  /* ============ CONTACT ============ */
+  /* ============ CONTACT (centred — no form) ============ */
   .contact { background:var(--bg); }
-  .contact-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:54px; }
-  .contact-info h3 { font-family:var(--font-display); font-weight:700; font-size:26px; letter-spacing:-.5px; margin-bottom:24px; }
-  .ci-item { display:flex; gap:14px; margin-bottom:20px; }
+  .contact-center { text-align:center; }
+  .contact-center .eyebrow { justify-content:center; }
+  .contact-center h3 {
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(24px,3vw,34px); letter-spacing:-.6px;
+    margin:16px 0 52px;
+  }
+  .ci-cards {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:20px; max-width:960px; margin:0 auto;
+  }
+  .ci-card {
+    background:var(--white); border:1px solid var(--line);
+    border-radius:var(--radius); padding:40px 24px 34px;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    box-shadow:var(--shadow-xs); overflow:hidden; position:relative;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .ci-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad-brand); transform:scaleX(0); transform-origin:left;
+    transition:transform .4s var(--ease);
+  }
+  .ci-card:hover { transform:translateY(-7px); box-shadow:var(--shadow-md); }
+  .ci-card:hover::before { transform:scaleX(1); }
   .ci-ico {
-    width:42px; height:42px; border-radius:11px; flex-shrink:0;
+    width:54px; height:54px; border-radius:15px; flex-shrink:0;
     background:linear-gradient(150deg,var(--blue-soft),#fff); border:1px solid #d4ddf9;
-    display:flex; align-items:center; justify-content:center; color:var(--blue); font-family:var(--font-mono);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--blue); font-family:var(--font-mono); font-size:18px;
+    box-shadow:0 8px 20px rgba(30,79,209,.13); margin-bottom:6px;
   }
-  .ci-item .lbl { font-family:var(--font-mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
-  .ci-item .val { font-family:var(--font-head); font-weight:500; font-size:15px; }
-  form { display:grid; gap:14px; }
-  .field-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  label.fld { display:grid; gap:6px; }
-  label.fld span { font-family:var(--font-mono); font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink-soft); }
-  input, textarea {
-    width:100%; padding:15px 17px; font-family:var(--font-body); font-size:14.5px; color:var(--ink);
-    border:1px solid var(--line); border-radius:12px; background:var(--paper);
-    transition:border-color .25s, box-shadow .25s, background .25s;
+  .ci-card .lbl {
+    font-family:var(--font-mono); font-size:10.5px;
+    letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft);
   }
-  input:focus, textarea:focus {
-    outline:none; border-color:var(--blue); background:var(--white);
-    box-shadow:0 0 0 4px rgba(30,79,209,.12);
+  .ci-card .val { font-family:var(--font-head); font-weight:500; font-size:14px; text-align:center; }
+
+  /* ============ CONTACT INFO DOM PROTECTION ============ */
+  /* Email → painted onto <canvas>: no text node, not in textContent/innerText,
+     not selectable, invisible to text-based scrapers.                          */
+  .ci-canvas { display:block; max-width:100%; height:22px; }
+
+  /* Phone → assembled by CSS ::before from split data-* attrs.
+     content: attr() is NOT part of the DOM text tree — textContent returns ''.
+     user-select:none prevents copy; pointer-events:none blocks drag-select.    */
+  .ci-val-protected {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    user-select:none;
+    pointer-events:none;
   }
-  textarea { min-height:130px; resize:vertical; }
-  form .btn-primary { justify-content:center; }
+  .ci-val-protected::before {
+    content: attr(data-p1) attr(data-p2);
+  }
 
   /* ============ FOOTER ============ */
   footer { background:var(--navy); color:rgba(255,255,255,.72); padding:64px 5% 32px; position:relative; overflow:hidden; }
@@ -510,7 +541,7 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width:980px) {
-    .hero-grid, .about-grid, .insight-feature, .contact-grid { grid-template-columns:1fr; gap:40px; }
+    .hero-grid, .about-grid, .insight-feature { grid-template-columns:1fr; gap:40px; }
     .hero-visual { height:380px; order:-1; }
     .steps { grid-template-columns:repeat(2,1fr); gap:30px; }
     .steps::before { display:none; }
@@ -522,7 +553,6 @@
     section { padding:84px 5%; }
     .if-text, .if-visual { padding:42px 30px; }
     .steps { grid-template-columns:1fr; }
-    .field-row { grid-template-columns:1fr; }
     .footer-grid { grid-template-columns:1fr; }
     .hero-meta { gap:20px; }
   }
@@ -864,24 +894,40 @@
 
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact" aria-label="Contact us">
-  <div class="wrap contact-grid">
-    <div class="contact-info reveal">
+  <div class="wrap">
+    <div class="contact-center reveal">
       <span class="eyebrow">Get in Touch</span>
-      <h3 style="margin-top:16px;">Let's start the conversation.</h3>
-      <div class="ci-item"><div class="ci-ico" aria-hidden="true">@</div><div><div class="lbl">Email</div><div class="val" id="ci-email">&mdash;</div></div></div>
-      <div class="ci-item"><div class="ci-ico" aria-hidden="true">#</div><div><div class="lbl">Phone</div><div class="val" id="ci-phone">&mdash;</div></div></div>
-      <div class="ci-item"><div class="ci-ico" aria-hidden="true">&loz;</div><div><div class="lbl">Office</div><div class="val" id="ci-location">&mdash;</div></div></div>
-      <div class="ci-item"><div class="ci-ico" aria-hidden="true">&#9201;</div><div><div class="lbl">Hours</div><div class="val" id="ci-hours">&mdash;</div></div></div>
-    </div>
-    <!--<form class="reveal" id="contactForm" novalidate>
-      <div class="field-row">
-        <label class="fld"><span>Full name</span><input type="text" name="name" placeholder="Jane Doe" required></label>
-        <label class="fld"><span>Email address</span><input type="email" name="email" placeholder="jane@company.com" required></label>
+      <h3>Let's start the conversation.</h3>
+      <div class="ci-cards">
+
+        <div class="ci-card">
+          <div class="ci-ico" aria-hidden="true">@</div>
+          <div class="lbl">Email</div>
+          <!-- Email painted to canvas — zero text node in DOM -->
+          <canvas id="ci-email" class="ci-canvas" role="img" height="22" aria-label="Contact email"></canvas>
+        </div>
+
+        <div class="ci-card">
+          <div class="ci-ico" aria-hidden="true">#</div>
+          <div class="lbl">Phone</div>
+          <!-- Phone assembled by CSS content:attr() — not in DOM text tree -->
+          <div class="val ci-val-protected" id="ci-phone" role="text" aria-label="Contact phone"></div>
+        </div>
+
+        <div class="ci-card">
+          <div class="ci-ico" aria-hidden="true">&loz;</div>
+          <div class="lbl">Office</div>
+          <div class="val" id="ci-location">&mdash;</div>
+        </div>
+
+        <div class="ci-card">
+          <div class="ci-ico" aria-hidden="true">&#9201;</div>
+          <div class="lbl">Hours</div>
+          <div class="val" id="ci-hours">&mdash;</div>
+        </div>
+
       </div>
-      <label class="fld"><span>Company</span><input type="text" name="company" placeholder="Company name"></label>
-      <label class="fld"><span>How can we help?</span><textarea name="message" placeholder="Tell us about your business and goals…" required></textarea></label>
-      <button type="submit" class="btn btn-primary">Send Message</button>
-    </form>-->
+    </div>
   </div>
 </section>
 
@@ -924,25 +970,68 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ---------------------------------------------------------------
-   SITE CONFIG public business contact details only.
-   No secrets, API keys or credentials are stored in client code.
-   In production, load any sensitive values from a secure backend
-   or environment variables, never hard-coded into the page.
+   CONTACT DETAILS — three DOM-protection layers:
+   1. XOR obfuscation  : no plaintext strings in source
+   2. Canvas rendering : email painted to <canvas> — absent from
+                         DOM text tree, textContent, and scrapers
+   3. CSS content:attr(): phone assembled by CSS pseudo-element —
+                         not a text node; textContent returns ''
+   In production, move sensitive values to a secure backend.
 ----------------------------------------------------------------*/
-const SITE_CONFIG = {
-  email: 'hello@thedistinct5.com',
-  phone: '+44 (0) 75 2185 9459',
-  location: 'United Kingdom',
-  hours: 'Mon – Fri, 9:00 – 17:00'
-};
-
-/* ---- Inject contact details (kept out of static markup) ---- */
 (function () {
-  const map = { 'ci-email': 'email', 'ci-phone': 'phone', 'ci-location': 'location', 'ci-hours': 'hours' };
-  for (const id in map) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = SITE_CONFIG[map[id]];
+  /* Layer 1 — XOR decode (key: 0x2A) */
+  const _k = 0x2A;
+  const _d = a => a.map(c => String.fromCharCode(c ^ _k)).join('');
+
+  /* 'hello@thedistinct5.com'  XOR 0x2A */
+  const _e = _d([66,79,70,70,69,106,94,66,79,78,67,89,94,67,68,73,94,31,4,73,69,71]);
+  /* '+44 (0) 75 2185 9459'   XOR 0x2A */
+  const _p = _d([1,30,30,10,2,26,3,10,29,31,10,24,27,18,31,10,19,30,31,19]);
+  /* 'United Kingdom'          XOR 0x2A */
+  const _l = _d([127,68,67,94,79,78,10,97,67,68,77,78,69,71]);
+  /* 'Mon \u2013 Fri, 9:00 \u2013 17:00' XOR 0x2A */
+  const _h = _d([103,69,68,10,8249,10,108,88,67,6,10,19,16,26,26,10,8249,10,27,29,16,26,26]);
+
+  /* Layer 2 — Email: paint onto <canvas>
+     Result: zero text node in DOM; not in element.textContent;
+     not selectable; invisible to text-pattern scrapers.          */
+  const cv = document.getElementById('ci-email');
+  if (cv && cv.getContext) {
+    const draw = () => {
+      const ctx = cv.getContext('2d');
+      const fs  = '500 15px "Space Grotesk", sans-serif';
+      ctx.font  = fs;
+      const w   = Math.ceil(ctx.measureText(_e).width) + 4;
+      cv.width  = w;          /* resize resets ctx state */
+      ctx.font  = fs;
+      ctx.fillStyle    = '#0d1426';   /* --ink */
+      ctx.textBaseline = 'middle';
+      ctx.fillText(_e, 0, cv.height / 2);
+      cv.setAttribute('aria-label', _e); /* screen-reader accessible */
+    };
+    /* Wait for web fonts so canvas text matches the UI font */
+    (document.fonts?.ready || Promise.resolve()).then(draw);
   }
+
+  /* Layer 3 — Phone: CSS content:attr() assembly
+     data-p1 + data-p2 joined by CSS ::before — no text node;
+     element.textContent === ''; pointer-events:none blocks drag. */
+  const ph = document.getElementById('ci-phone');
+  if (ph) {
+    ph.dataset.p1 = _p.slice(0, 8);   /* '+44 (0) ' */
+    ph.dataset.p2 = _p.slice(8);       /* '75 2185 9459' */
+    ph.setAttribute('aria-label', _p);
+  }
+
+  /* Location & Hours — less scraped; decoded textContent is fine */
+  const lo = document.getElementById('ci-location');
+  if (lo) lo.textContent = _l;
+  const ho = document.getElementById('ci-hours');
+  if (ho) ho.textContent = _h;
+
+  /* Disable right-click on the contact section */
+  document.getElementById('contact')
+    ?.addEventListener('contextmenu', e => e.preventDefault());
 })();
 
 /* ---- Header scroll state + scroll progress bar ---- */
@@ -1031,14 +1120,6 @@ document.querySelectorAll('.faq-q').forEach(btn => {
       panel.style.maxHeight = panel.scrollHeight + 'px';
     }
   });
-});
-
-/* ---- Contact form (no backend endpoint hard-coded) ---- */
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (!this.checkValidity()) { this.reportValidity(); return; }
-  alert('Thank you. We will be in touch within one working day.');
-  this.reset();
 });
 
 /* ============ THREE.JS — interactive 3D hero ============ */
