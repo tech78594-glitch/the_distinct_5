@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE DISTINCT 5 Ltd | Business Consultancy &amp; Advisory</title>
+<meta name="description" content="THE DISTINCT 5 Ltd — business consultancy and advisory services. Clarity, strategy and measurable growth for ambitious companies.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root {
+    --white:#ffffff;
+    --paper:#f6f7fb;
+    --paper-2:#eef1f8;
+    --bg:#eef2fd;
+    --bg-2:#e3e9fa;
+    --ink:#0d1426;
+    --ink-soft:#525b70;
+    --line:#e6e8f1;
+    --blue:#1e4fd1;
+    --blue-dk:#1739a6;
+    --blue-lt:#5b7be8;
+    --blue-soft:#eef2fd;
+    --navy:#0b1530;
+    --green:#1f9d6b;
+    --green-lt:#39c489;
+    --green-soft:#e9f7f1;
+    --font-display:'Sora',sans-serif;
+    --font-head:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --grad-brand:linear-gradient(120deg,#1e4fd1,#1f9d6b);
+    --grad-btn:linear-gradient(120deg,#2a5be0,#1739a6);
+    --grad-cta:linear-gradient(135deg,#0b1530 0%,#13266b 55%,#1e4fd1 135%);
+    --shadow-xs:0 2px 8px rgba(13,20,38,.05);
+    --shadow-sm:0 8px 24px rgba(13,20,38,.07);
+    --shadow-md:0 20px 48px rgba(13,20,38,.10);
+    --shadow-lg:0 36px 80px rgba(13,20,38,.18);
+    --radius:18px;
+    --ease:cubic-bezier(.22,.68,.2,1);
+  }
+
+  /* ============ RESET ============ */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; }
+  ::selection { background:rgba(30,79,209,.16); }
+
+  /* ---- Accessible focus states ---- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline:3px solid var(--blue);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+  .skip-link {
+    position:absolute; left:50%; transform:translateX(-50%) translateY(-140%);
+    top:10px; z-index:3000; background:var(--ink); color:#fff;
+    padding:12px 22px; border-radius:50px; font-family:var(--font-head);
+    font-weight:600; font-size:14px; transition:transform .25s var(--ease);
+  }
+  .skip-link:focus { transform:translateX(-50%) translateY(0); }
+  .sr-only {
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  /* ============ KEYFRAMES ============ */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(40px,-30px) scale(1.12);} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-50px,40px) scale(1.18);} }
+  @keyframes slide { to{transform:translateX(-50%);} }
+
+  /* ============ SCROLL PROGRESS ============ */
+  .progress {
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--grad-brand); z-index:2000;
+    box-shadow:0 0 12px rgba(30,79,209,.5);
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    padding:16px 5%;
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(255,255,255,.74);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid transparent;
+    transition:padding .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  }
+  header.scrolled { padding:10px 5%; box-shadow:var(--shadow-xs); border-bottom:1px solid var(--line); }
+  .logo {
+    font-family:var(--font-display); font-weight:800; font-size:19px; letter-spacing:1.5px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .logo .mark {
+    width:30px; height:30px; border-radius:9px;
+    background:var(--grad-brand); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:15px; font-weight:800;
+    box-shadow:0 6px 16px rgba(30,79,209,.4);
+    transition:transform .5s var(--ease);
+  }
+  .logo:hover .mark { transform:rotate(180deg) scale(1.08); }
+  nav ul { display:flex; gap:30px; list-style:none; }
+  nav a { font-size:14px; font-weight:500; color:var(--ink-soft); position:relative; transition:color .2s; }
+  nav a::after {
+    content:''; position:absolute; left:0; bottom:-6px;
+    width:0; height:2px; background:var(--grad-brand); transition:width .3s var(--ease);
+  }
+  nav a:hover { color:var(--ink); }
+  nav a:hover::after { width:100%; }
+
+  .btn {
+    font-family:var(--font-head);
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; font-size:14px; font-weight:600;
+    letter-spacing:.3px; border-radius:50px; cursor:pointer;
+    border:1px solid transparent; position:relative; overflow:hidden;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .btn-primary { background:var(--grad-btn); color:#fff; box-shadow:0 10px 26px rgba(30,79,209,.34); }
+  .btn-primary::before {
+    content:''; position:absolute; top:0; left:-120%;
+    width:60%; height:100%; transform:skewX(-20deg);
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+    transition:left .6s var(--ease);
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(30,79,209,.46); }
+  .btn-primary:hover::before { left:130%; }
+  .btn-ghost { background:var(--white); color:var(--ink); border:1px solid var(--line); box-shadow:var(--shadow-xs); }
+  .btn-ghost:hover { transform:translateY(-3px); border-color:var(--blue); color:var(--blue); }
+  .nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+  .nav-toggle span { width:24px; height:2px; background:var(--ink); border-radius:2px; }
+
+  /* ============ LAYOUT ============ */
+  section { padding:120px 5%; position:relative; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .narrow { max-width:820px; margin:0 auto; }
+  .eyebrow {
+    font-family:var(--font-mono);
+    font-size:12px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--blue); display:inline-flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before { content:''; width:24px; height:2px; background:var(--grad-brand); }
+  .section-head { max-width:680px; margin:0 auto 64px; text-align:center; }
+  .section-head .eyebrow { justify-content:center; margin-bottom:18px; }
+  .section-head h2 {
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(30px,4.2vw,46px); line-height:1.12;
+    letter-spacing:-.8px; margin-bottom:16px;
+  }
+  .section-head p { color:var(--ink-soft); font-size:16.5px; }
+  .grad-text { background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ============ REVEAL / MOTION ============ */
+  .reveal { opacity:0; transform:translateY(34px); transition:opacity .7s ease, transform .7s var(--ease); }
+  .reveal.in { opacity:1; transform:translateY(0); }
+  .stagger > .reveal:nth-child(2) { transition-delay:.08s; }
+  .stagger > .reveal:nth-child(3) { transition-delay:.16s; }
+  .stagger > .reveal:nth-child(4) { transition-delay:.24s; }
+  .stagger > .reveal:nth-child(5) { transition-delay:.32s; }
+  .stagger > .reveal:nth-child(6) { transition-delay:.40s; }
+  .stagger > .reveal:nth-child(7) { transition-delay:.48s; }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height:100vh; padding-top:160px;
+    display:flex; align-items:center;
+    background:
+      radial-gradient(38% 50% at 85% 16%, rgba(31,157,107,.14), transparent 72%),
+      radial-gradient(40% 55% at 10% 80%, rgba(30,79,209,.13), transparent 72%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .blob { position:absolute; border-radius:50%; filter:blur(70px); z-index:0; }
+  .blob-1 { width:420px; height:420px; top:-80px; right:-60px;
+    background:radial-gradient(circle,rgba(30,79,209,.32),transparent 68%); animation:float1 18s ease-in-out infinite; }
+  .blob-2 { width:380px; height:380px; bottom:-120px; left:-80px;
+    background:radial-gradient(circle,rgba(31,157,107,.30),transparent 68%); animation:float2 22s ease-in-out infinite; }
+
+  .hero-grid {
+    max-width:1180px; margin:0 auto; width:100%;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:50px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .hero-copy .eyebrow { margin-bottom:24px; animation:fadeUp .8s .05s both; }
+  .hero h1 {
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(40px,5.6vw,68px); line-height:1.04;
+    letter-spacing:-1.6px; margin-bottom:24px; animation:fadeUp .9s .15s both;
+  }
+  .hero p {
+    font-size:18px; color:var(--ink-soft); max-width:520px;
+    margin-bottom:34px; animation:fadeUp .9s .3s both;
+  }
+  .hero-cta { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp .9s .45s both; }
+  .hero-meta { margin-top:38px; display:flex; gap:30px; flex-wrap:wrap; animation:fadeUp .9s .6s both; }
+  .hero-meta .m-num { font-family:var(--font-display); font-weight:800; font-size:26px; }
+  .hero-meta .m-lbl { font-family:var(--font-mono); font-size:11px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--ink-soft); }
+
+  .hero-visual { position:relative; height:480px; animation:fadeUp 1s .35s both; }
+  .hero-visual::before {
+    content:''; position:absolute; inset:8% 10%;
+    background:var(--grad-brand); border-radius:50%; filter:blur(80px); opacity:.28; z-index:0;
+  }
+  #hero3d { position:relative; z-index:1; width:100%; height:100%; }
+  .hv-badge {
+    position:absolute; z-index:3; background:rgba(255,255,255,.85);
+    backdrop-filter:blur(10px); border:1px solid var(--line);
+    border-radius:14px; padding:12px 16px; box-shadow:var(--shadow-md);
+    font-family:var(--font-head); font-weight:600; font-size:13px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .hv-badge .dot { width:9px; height:9px; border-radius:50%; }
+  .hv-badge.b1 { top:8%; left:-4%; animation:float1 9s ease-in-out infinite; }
+  .hv-badge.b2 { bottom:12%; right:-4%; animation:float2 11s ease-in-out infinite; }
+
+  /* ============ MARQUEE ============ */
+  .marquee-band { padding:30px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background:var(--bg-2); overflow:hidden; }
+  .marquee { display:flex; width:max-content; animation:slide 32s linear infinite; }
+  .marquee:hover { animation-play-state:paused; }
+  .marquee span {
+    font-family:var(--font-head); font-weight:600; font-size:15px;
+    color:var(--ink-soft); padding:0 30px; display:flex; align-items:center; gap:30px;
+  }
+  .marquee span::after { content:'\25C6'; color:var(--blue); font-size:9px; }
+
+  /* ============ ABOUT ============ */
+  .about { background:var(--bg); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .about-grid h3 {
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(26px,3vw,34px); line-height:1.2; letter-spacing:-.6px; margin-bottom:20px;
+  }
+  .about-grid .lead { color:var(--ink-soft); margin-bottom:16px; }
+  .stats { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .stat {
+    padding:30px 24px; border-radius:var(--radius);
+    background:linear-gradient(160deg,var(--paper),var(--white));
+    border:1px solid var(--line); text-align:center;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .stat:hover { transform:translateY(-6px); box-shadow:var(--shadow-md); }
+  .stat .num {
+    font-family:var(--font-display); font-weight:800; font-size:40px;
+    background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat .lbl { font-family:var(--font-mono); font-size:11px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--ink-soft); margin-top:6px; }
+
+  /* ============ SERVICES (3D tilt + feature bullets) ============ */
+  .services { background:linear-gradient(180deg,var(--bg),var(--bg-2)); }
+  .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:26px; }
+  .tilt {
+    transform-style:preserve-3d;
+    transition:transform .35s var(--ease), box-shadow .35s ease, opacity .7s ease;
+    will-change:transform;
+  }
+  .service {
+    padding:38px 32px; border-radius:var(--radius);
+    background:var(--white); border:1px solid var(--line);
+    box-shadow:var(--shadow-sm); position:relative; overflow:hidden;
+  }
+  .service::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad-brand); transform:scaleX(0); transform-origin:left;
+    transition:transform .4s var(--ease);
+  }
+  .service:hover { box-shadow:var(--shadow-lg); }
+  .service:hover::before { transform:scaleX(1); }
+  .service-top { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+  .service-icon {
+    width:60px; height:60px; border-radius:16px; flex-shrink:0;
+    background:linear-gradient(150deg,var(--blue-soft),#fff);
+    border:1px solid #d4ddf9;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:20px; font-weight:800;
+    color:var(--blue); transform:translateZ(48px);
+    box-shadow:0 12px 26px rgba(30,79,209,.16);
+  }
+  .service h3 { font-family:var(--font-head); font-weight:600; font-size:19px; transform:translateZ(30px); }
+  .service p { color:var(--ink-soft); font-size:14.5px; margin-bottom:18px; transform:translateZ(16px); }
+  .feat { list-style:none; display:grid; gap:9px; transform:translateZ(22px); }
+  .feat li { font-size:13.5px; color:var(--ink); display:flex; align-items:flex-start; gap:9px; }
+  .feat li::before {
+    content:''; width:16px; height:16px; border-radius:5px; flex-shrink:0; margin-top:2px;
+    background:var(--grad-brand) padding-box;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.85);
+  }
+
+  /* ============ PROCESS ============ */
+  .process { background:var(--bg-2); }
+  .steps { position:relative; display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+  .steps::before {
+    content:''; position:absolute; top:34px; left:8%; right:8%; height:2px;
+    background:linear-gradient(90deg,var(--blue),var(--green));
+  }
+  .step { text-align:center; position:relative; }
+  .step-badge {
+    width:68px; height:68px; margin:0 auto 22px; border-radius:50%;
+    background:var(--white); border:2px solid var(--green);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:800; font-size:20px;
+    color:var(--green); position:relative; z-index:2;
+    transition:transform .35s var(--ease), box-shadow .35s ease, background .35s, color .35s;
+  }
+  .step:hover .step-badge {
+    transform:translateY(-8px) scale(1.08);
+    box-shadow:0 14px 28px rgba(31,157,107,.34);
+    background:var(--green); color:#fff;
+  }
+  .step h4 { font-family:var(--font-head); font-weight:600; font-size:16px; margin-bottom:8px; }
+  .step p { font-size:13px; color:var(--ink-soft); }
+
+  /* ============ WHY ============ */
+  .why { background:var(--bg); }
+  .grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; }
+  .why-card {
+    padding:32px 26px; border-radius:var(--radius);
+    background:linear-gradient(165deg,var(--white),var(--paper));
+    border:1px solid var(--line); position:relative; overflow:hidden;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .7s ease;
+  }
+  .why-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-md); }
+  .why-num { font-family:var(--font-mono); font-size:13px; color:var(--green); font-weight:500; margin-bottom:14px; }
+  .why-card h4 { font-family:var(--font-head); font-weight:600; font-size:18px; margin-bottom:10px; }
+  .why-card p { color:var(--ink-soft); font-size:14px; }
+  .why-card::after {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:var(--grad-brand); transform:scaleY(0); transform-origin:top; transition:transform .4s var(--ease);
+  }
+  .why-card:hover::after { transform:scaleY(1); }
+
+  /* ============ INSIGHTS FEATURE ============ */
+  .insights { background:linear-gradient(180deg,var(--bg-2),var(--bg)); }
+  .insight-feature {
+    display:grid; grid-template-columns:1.05fr .95fr;
+    border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--line);
+  }
+  .if-text { padding:60px 52px; background:var(--white); }
+  .if-tag {
+    font-family:var(--font-mono); font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--blue); border:1px solid var(--blue); border-radius:50px;
+    padding:5px 14px; display:inline-block; margin-bottom:22px;
+  }
+  .if-text h3 { font-family:var(--font-display); font-weight:700; font-size:30px; line-height:1.2; letter-spacing:-.6px; margin-bottom:16px; }
+  .if-text p { color:var(--ink-soft); font-size:15px; margin-bottom:30px; }
+  .if-visual {
+    background:var(--grad-cta); color:#fff; padding:60px 52px;
+    display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+  }
+  .if-visual::before {
+    content:''; position:absolute; width:260px; height:260px; border-radius:50%;
+    background:radial-gradient(circle,rgba(31,157,107,.4),transparent 70%); top:-80px; right:-60px;
+  }
+  .if-visual .vh { font-family:var(--font-mono); font-size:12px; letter-spacing:2px;
+    text-transform:uppercase; color:var(--green-lt); margin-bottom:18px; position:relative; }
+  .if-visual ul { list-style:none; position:relative; }
+  .if-visual li {
+    padding:13px 0 13px 30px; font-family:var(--font-head); font-weight:500; font-size:15.5px;
+    border-bottom:1px solid rgba(255,255,255,.12); position:relative;
+  }
+  .if-visual li:last-child { border-bottom:none; }
+  .if-visual li::before {
+    content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+    width:13px; height:13px; border-radius:50%;
+    background:var(--grad-brand); box-shadow:0 0 12px rgba(31,157,107,.7);
+  }
+
+  /* ============ TESTIMONIALS (with metrics) ============ */
+  .testimonials { background:var(--bg-2); }
+  .quote {
+    padding:34px 30px; border-radius:var(--radius);
+    background:var(--white); border:1px solid var(--line);
+    box-shadow:var(--shadow-sm); position:relative;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .7s ease;
+  }
+  .quote:hover { transform:translateY(-8px); box-shadow:var(--shadow-md); }
+  .q-metric {
+    display:flex; align-items:baseline; gap:8px; padding-bottom:18px;
+    margin-bottom:18px; border-bottom:1px solid var(--line);
+  }
+  .q-metric .qm-num {
+    font-family:var(--font-display); font-weight:800; font-size:34px;
+    background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .q-metric .qm-lbl { font-family:var(--font-head); font-weight:500; font-size:13px; color:var(--ink-soft); }
+  .quote p { font-size:14.5px; color:var(--ink-soft); margin-bottom:22px; }
+  .quote .who { display:flex; align-items:center; gap:12px; }
+  .quote .av {
+    width:44px; height:44px; border-radius:50%; background:var(--grad-brand);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:var(--font-display); font-weight:700; font-size:15px;
+  }
+  .quote .nm { font-family:var(--font-head); font-weight:600; font-size:14px; }
+  .quote .rl { font-size:12px; color:var(--ink-soft); }
+
+  /* ============ FAQ ACCORDION ============ */
+  .faq { background:var(--bg); }
+  .faq-list { max-width:820px; margin:0 auto; }
+  .faq-item {
+    border:1px solid var(--line); border-radius:14px;
+    background:var(--white); margin-bottom:14px; overflow:hidden;
+    transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .faq-item.open { border-color:var(--blue); box-shadow:var(--shadow-sm); }
+  .faq-q {
+    width:100%; text-align:left; cursor:pointer; background:none; border:none;
+    padding:24px 26px; display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:var(--font-head); font-weight:600; font-size:16.5px; color:var(--ink);
+  }
+  .faq-icon {
+    width:30px; height:30px; flex-shrink:0; border-radius:9px;
+    background:var(--blue-soft); color:var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:600; transition:transform .35s var(--ease), background .3s, color .3s;
+  }
+  .faq-item.open .faq-icon { transform:rotate(135deg); background:var(--grad-btn); color:#fff; }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height .4s var(--ease); }
+  .faq-a-inner { padding:0 26px 24px; color:var(--ink-soft); font-size:14.5px; }
+
+  /* ============ CTA ============ */
+  .cta-wrap { padding:120px 0; }
+  .cta-band {
+    margin:0 5%; border-radius:28px;
+    background:var(--grad-cta); color:#fff; text-align:center;
+    padding:84px 6%; position:relative; overflow:hidden;
+  }
+  .cta-band::before, .cta-band::after { content:''; position:absolute; border-radius:50%; filter:blur(60px); }
+  .cta-band::before { width:300px; height:300px; background:rgba(30,79,209,.5); top:-120px; left:-60px; animation:float1 16s ease-in-out infinite; }
+  .cta-band::after { width:280px; height:280px; background:rgba(31,157,107,.42); bottom:-120px; right:-50px; animation:float2 20s ease-in-out infinite; }
+  .cta-inner { position:relative; z-index:2; }
+  .cta-band h2 { font-family:var(--font-display); font-weight:800; font-size:clamp(28px,4vw,46px); letter-spacing:-.8px; margin-bottom:14px; }
+  .cta-band p { color:rgba(255,255,255,.82); max-width:540px; margin:0 auto 30px; }
+  .cta-band .btn-primary { background:var(--white); color:var(--navy); box-shadow:0 14px 34px rgba(0,0,0,.3); }
+
+  /* ============ CONTACT ============ */
+  .contact { background:var(--bg); }
+  .contact-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:54px; }
+  .contact-info h3 { font-family:var(--font-display); font-weight:700; font-size:26px; letter-spacing:-.5px; margin-bottom:24px; }
+  .ci-item { display:flex; gap:14px; margin-bottom:20px; }
+  .ci-ico {
+    width:42px; height:42px; border-radius:11px; flex-shrink:0;
+    background:linear-gradient(150deg,var(--blue-soft),#fff); border:1px solid #d4ddf9;
+    display:flex; align-items:center; justify-content:center; color:var(--blue); font-family:var(--font-mono);
+  }
+  .ci-item .lbl { font-family:var(--font-mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
+  .ci-item .val { font-family:var(--font-head); font-weight:500; font-size:15px; }
+  form { display:grid; gap:14px; }
+  .field-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  label.fld { display:grid; gap:6px; }
+  label.fld span { font-family:var(--font-mono); font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink-soft); }
+  input, textarea {
+    width:100%; padding:15px 17px; font-family:var(--font-body); font-size:14.5px; color:var(--ink);
+    border:1px solid var(--line); border-radius:12px; background:var(--paper);
+    transition:border-color .25s, box-shadow .25s, background .25s;
+  }
+  input:focus, textarea:focus {
+    outline:none; border-color:var(--blue); background:var(--white);
+    box-shadow:0 0 0 4px rgba(30,79,209,.12);
+  }
+  textarea { min-height:130px; resize:vertical; }
+  form .btn-primary { justify-content:center; }
+
+  /* ============ FOOTER ============ */
+  footer { background:var(--navy); color:rgba(255,255,255,.72); padding:64px 5% 32px; position:relative; overflow:hidden; }
+  footer::before {
+    content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+    width:600px; height:300px; background:radial-gradient(circle,rgba(30,79,209,.3),transparent 70%); filter:blur(40px);
+  }
+  .footer-grid {
+    max-width:1180px; margin:0 auto; position:relative; z-index:2;
+    display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  footer .logo { color:#fff; margin-bottom:16px; }
+  footer .f-about { font-size:14px; max-width:300px; }
+  footer h5 { font-family:var(--font-head); color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px; }
+  footer ul { list-style:none; display:grid; gap:10px; }
+  footer ul a { font-size:14px; transition:color .2s; }
+  footer ul a:hover { color:var(--green-lt); }
+  .footer-bottom {
+    max-width:1180px; margin:24px auto 0; position:relative; z-index:2;
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:13px;
+  }
+
+  /* ============ MOBILE MENU ============ */
+  .mobile-menu {
+    position:fixed; inset:0; z-index:1500;
+    background:rgba(255,255,255,.98); backdrop-filter:blur(12px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:26px; opacity:0; pointer-events:none; transition:opacity .3s var(--ease);
+  }
+  .mobile-menu.open { opacity:1; pointer-events:auto; }
+  .mobile-menu a { font-family:var(--font-display); font-weight:700; font-size:24px; }
+  .mobile-menu .close { position:absolute; top:24px; right:6%; background:none; border:none; font-size:34px; cursor:pointer; color:var(--ink); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:980px) {
+    .hero-grid, .about-grid, .insight-feature, .contact-grid { grid-template-columns:1fr; gap:40px; }
+    .hero-visual { height:380px; order:-1; }
+    .steps { grid-template-columns:repeat(2,1fr); gap:30px; }
+    .steps::before { display:none; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:680px) {
+    nav ul, header .btn { display:none; }
+    .nav-toggle { display:flex; }
+    section { padding:84px 5%; }
+    .if-text, .if-visual { padding:42px 30px; }
+    .steps { grid-template-columns:1fr; }
+    .field-row { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr; }
+    .hero-meta { gap:20px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *, *::before, *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+    .reveal { opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header id="header">
+  <a href="index.html" class="logo" aria-label="THE DISTINCT 5 — home">
+    <span class="mark" aria-hidden="true">5</span> THE DISTINCT 5
+  </a>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="ai-in-b2b.html">AI in B2B</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="#contact" class="btn btn-primary">Book a Call</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="close" id="menuClose" aria-label="Close menu">&times;</button>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#process">Process</a>
+  <a href="#insights">Insights</a>
+  <a href="ai-in-b2b.html">AI in B2B</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Introduction">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Business Consultancy &amp; Advisory</span>
+      <h1>Clarity. Strategy.<br><span class="grad-text">Measurable Growth.</span></h1>
+      <p>THE DISTINCT 5 Ltd partners with ambitious businesses to solve complex problems, sharpen strategy, and unlock sustainable performance. We turn expertise into outcomes you can measure.</p>
+      <div class="hero-cta">
+        <a href="#services" class="btn btn-primary">Explore Services &rarr;</a>
+        <a href="#contact" class="btn btn-ghost">Schedule Consultation</a>
+      </div>
+      <!-- <div class="hero-meta"> -->
+        <!-- <div><div class="m-num grad-text">120+</div><div class="m-lbl">Clients Served</div></div> -->
+        <!-- <div><div class="m-num grad-text">£40M+</div><div class="m-lbl">Value Created</div></div> -->
+        <!-- <div><div class="m-num grad-text">98%</div><div class="m-lbl">Retention</div></div> -->
+      <!-- </div> -->
+    </div>
+    <div class="hero-visual">
+      <canvas id="hero3d" aria-hidden="true"></canvas>
+      <div class="hv-badge b1" aria-hidden="true"><span class="dot" style="background:var(--blue)"></span> Strategy</div>
+      <div class="hv-badge b2" aria-hidden="true"><span class="dot" style="background:var(--green)"></span> Growth</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee">
+    <span>Small Business</span><span>Startups</span><span>E-Commerce</span>
+    <span>Financial Turnaround</span><span>Operations Efficiency</span><span>Professional Services</span>
+    <span>Small Business</span><span>Startups</span><span>E-Commerce</span>
+    <span>Financial Turnaround</span><span>Operations Efficiency</span><span>Professional Services</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about" aria-label="About us">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">Who We Are</span>
+      <h3 style="margin-top:16px;">Five disciplines. One outcome: growth that lasts.</h3>
+      <p class="lead">We combine deep operational experience with proven frameworks across strategy, finance, marketing, leadership, and operations the five distinct pillars of every high-performing company.</p>
+      <p class="lead">Whether you're scaling a startup, restructuring a mature business, or stepping into a new market, we bring the clarity, structure, and strategy you need to move forward with confidence.</p>
+    </div>
+    <!-- <div class="stats stagger"> -->
+      <!-- <div class="stat reveal"><div class="num" data-count="120" data-suffix="+">0</div><div class="lbl">Clients Served</div></div> -->
+      <!-- <div class="stat reveal"><div class="num" data-count="40" data-prefix="£" data-suffix="M+">0</div><div class="lbl">Value Created</div></div> -->
+      <!-- <div class="stat reveal"><div class="num" data-count="15" data-suffix="+">0</div><div class="lbl">Years Combined</div></div> -->
+      <!-- <div class="stat reveal"><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Client Retention</div></div> -->
+    <!-- </div> -->
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services" aria-label="Our services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Services</span>
+      <h2>Engineered around <span class="grad-text">your business</span></h2>
+      <p>Tailored consultancy and ongoing advisory engagements, each built for measurable impact.</p>
+    </div>
+    <div class="grid-3 stagger">
+      <article class="tilt service reveal">
+        <div class="service-top"><div class="service-icon" aria-hidden="true">01</div><h3>Business Strategy</h3></div>
+        <p>Growth planning, market positioning, and long-term roadmaps that align your team and resources.</p>
+        <ul class="feat">
+          <li>Growth &amp; market-entry roadmaps</li>
+          <li>Competitive positioning</li>
+          <li>Quarterly execution planning</li>
+        </ul>
+      </article>
+      <article class="tilt service reveal">
+        <div class="service-top"><div class="service-icon" aria-hidden="true">02</div><h3>Financial Advisory</h3></div>
+        <p>Cost control, financial planning, and turnaround strategies that protect margin and fuel scale.</p>
+        <ul class="feat">
+          <li>Cost &amp; margin optimisation</li>
+          <li>Cash-flow &amp; forecasting</li>
+          <li>Turnaround strategy</li>
+        </ul>
+      </article>
+      <article class="tilt service reveal">
+        <div class="service-top"><div class="service-icon" aria-hidden="true">03</div><h3>Marketing &amp; Sales</h3></div>
+        <p>Conversion-focused frameworks that build pipeline, improve close rates, and grow recurring revenue.</p>
+        <ul class="feat">
+          <li>Pipeline &amp; demand generation</li>
+          <li>Sales process design</li>
+          <li>Retention &amp; recurring revenue</li>
+        </ul>
+      </article>
+      <article class="tilt service reveal">
+        <div class="service-top"><div class="service-icon" aria-hidden="true">04</div><h3>Leadership Development</h3></div>
+        <p>Team structure, executive coaching, and culture design that produce capable, accountable leaders.</p>
+        <ul class="feat">
+          <li>Org structure &amp; roles</li>
+          <li>Executive coaching</li>
+          <li>Culture &amp; accountability</li>
+        </ul>
+      </article>
+      <article class="tilt service reveal">
+        <div class="service-top"><div class="service-icon" aria-hidden="true">05</div><h3>Operations Optimization</h3></div>
+        <p>Process design and efficiency programmes that reduce waste and strengthen delivery at every level.</p>
+        <ul class="feat">
+          <li>Process mapping &amp; redesign</li>
+          <li>Efficiency &amp; waste reduction</li>
+          <li>Performance tracking</li>
+        </ul>
+      </article>
+      <article class="tilt service reveal">
+        <div class="service-top"><div class="service-icon" aria-hidden="true">+</div><h3>Fractional Executive</h3></div>
+        <p>Part-time CFO, COO, and strategy leadership for businesses that need senior expertise without the full-time cost.</p>
+        <ul class="feat">
+          <li>Fractional CFO &amp; COO</li>
+          <li>Hands-on leadership</li>
+          <li>Flexible, scalable engagement</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process" id="process" aria-label="How we work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How We Work</span>
+      <h2>From conversation to <span class="grad-text">measurable result</span></h2>
+      <p>A clear, repeatable engagement model that keeps every project on track.</p>
+    </div>
+    <div class="steps stagger">
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">1</div><h4>Discovery</h4><p>A focused conversation to understand your goals, challenges, and current performance.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">2</div><h4>Diagnose</h4><p>Comprehensive audit of finances, operations, marketing, and team performance.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">3</div><h4>Design</h4><p>A tailored action plan with clear priorities, milestones, and success metrics.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">4</div><h4>Deliver</h4><p>Hands-on implementation alongside your team not just recommendations.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">5</div><h4>Drive</h4><p>Ongoing advisory to sustain results, refine strategy, and unlock the next stage of growth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="why" aria-label="Why choose us">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why THE DISTINCT 5</span>
+      <h2>Operators, builders &amp; <span class="grad-text">partners</span></h2>
+      <p>We're not just advisors we're invested in your outcome.</p>
+    </div>
+    <div class="grid-4 stagger">
+      <div class="why-card reveal"><div class="why-num">/ 01</div><h4>Outcome-Focused</h4><p>Measured by revenue lifted, costs reduced, and efficiency gained not slides delivered.</p></div>
+      <div class="why-card reveal"><div class="why-num">/ 02</div><h4>Senior-Led</h4><p>You work directly with experienced consultants never handed off to junior teams.</p></div>
+      <div class="why-card reveal"><div class="why-num">/ 03</div><h4>Proven Frameworks</h4><p>Repeatable playbooks refined across industries and built to scale with your business.</p></div>
+      <div class="why-card reveal"><div class="why-num">/ 04</div><h4>Long-Term Partnership</h4><p>From project work to fractional leadership, we're built for the long game.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="insights" id="insights" aria-label="Insights">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Insights</span>
+      <h2>Thinking that keeps you <span class="grad-text">ahead</span></h2>
+      <p>Practical guidance from our advisory team.</p>
+    </div>
+    <div class="insight-feature reveal">
+      <div class="if-text">
+        <span class="if-tag">Featured Guide</span>
+        <h3>How to Use AI in B2B</h3>
+        <p>A practical guide for business leaders on integrating artificial intelligence into B2B operations covering high-impact use cases, a 5-step adoption framework, common pitfalls, and a realistic 12-month roadmap.</p>
+        <a href="ai-in-b2b.html" class="btn btn-primary">Read the Guide &rarr;</a>
+      </div>
+      <div class="if-visual">
+        <div class="vh">Inside the Guide</div>
+        <ul>
+          <li>7 high-impact AI use cases</li>
+          <li>5-step adoption framework</li>
+          <li>Pitfalls to avoid</li>
+          <li>12-month roadmap</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<!-- <section class="testimonials" aria-label="Client results"> -->
+  <!-- <div class="wrap"> -->
+    <!-- <div class="section-head reveal"> -->
+      <!-- <span class="eyebrow">Client Results</span> -->
+      <!-- <h2>When strategy meets <span class="grad-text">execution</span></h2> -->
+      <!-- <p>Real outcomes from real engagements.</p> -->
+    <!-- </div> -->
+    <!-- <div class="grid-3 stagger"> -->
+      <!-- <figure class="quote reveal"> -->
+        <!-- <div class="q-metric"><span class="qm-num">+47%</span><span class="qm-lbl">revenue in 12 months</span></div> -->
+        <!-- <blockquote><p>THE DISTINCT 5 helped us restructure our operations and grow revenue by 47% in twelve months. The clarity they brought to our strategy was transformative.</p></blockquote> -->
+        <!-- <figcaption class="who"><div class="av" aria-hidden="true">SM</div><div><div class="nm">Sarah Mitchell</div><div class="rl">CEO, Northstar Retail</div></div></figcaption> -->
+      <!-- </figure> -->
+      <!-- <figure class="quote reveal"> -->
+        <!-- <div class="q-metric"><span class="qm-num">3x</span><span class="qm-lbl">cash runway extended</span></div> -->
+        <!-- <blockquote><p>Their fractional CFO engagement saved us from a cash crisis and built the financial discipline we needed to scale. Worth every penny.</p></blockquote> -->
+        <!-- <figcaption class="who"><div class="av" aria-hidden="true">JO</div><div><div class="nm">James Okafor</div><div class="rl">Founder, Vantage Tech</div></div></figcaption> -->
+      <!-- </figure> -->
+      <!-- <figure class="quote reveal"> -->
+        <!-- <div class="q-metric"><span class="qm-num">30%</span><span class="qm-lbl">faster delivery cycles</span></div> -->
+        <!-- <blockquote><p>Practical, senior, and deeply invested in our success. They became an extension of our leadership team not just outside consultants.</p></blockquote> -->
+        <!-- <figcaption class="who"><div class="av" aria-hidden="true">PS</div><div><div class="nm">Priya Sharma</div><div class="rl">Managing Director, Apex Health</div></div></figcaption> -->
+      <!-- </figure> -->
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </section> -->
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq" aria-label="Frequently asked questions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions? Answers.</span>
+      <h2>Frequently asked <span class="grad-text">questions</span></h2>
+      <p>The things prospective clients ask us most.</p>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" id="faq1q" aria-expanded="false" aria-controls="faq1a">
+          What happens in the first discovery call?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq1a" role="region" aria-labelledby="faq1q">
+          <div class="faq-a-inner">The first call is a focused, no-obligation conversation. We learn about your goals, current challenges, and where performance is falling short then outline whether and how we can help. It typically leads to a paid assessment or strategy session if there's a strong fit.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq2q" aria-expanded="false" aria-controls="faq2a">
+          What size and type of business do you work with?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq2a" role="region" aria-labelledby="faq2q">
+          <div class="faq-a-inner">We work with small businesses, startups, e-commerce brands, and established firms typically those ready to scale, restructure, or stabilise. Our frameworks adapt to your stage, so engagements range from a single project to ongoing advisory.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq3q" aria-expanded="false" aria-controls="faq3a">
+          How quickly will we see results?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq3a" role="region" aria-labelledby="faq3q">
+          <div class="faq-a-inner">Some improvements such as cost savings, process fixes, quick wins surface within the first weeks. <br>Strategic outcomes such as revenue growth or market expansion typically build over one to two quarters. <br>Every engagement is measured against clear metrics agreed up front.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq4q" aria-expanded="false" aria-controls="faq4a">
+          Do you offer ongoing advisory or only one-time projects?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq4a" role="region" aria-labelledby="faq4q">
+          <div class="faq-a-inner">Both. <br>Many clients begin with a defined consulting project, then move to a monthly advisory retainer or a fractional executive arrangement. Ongoing support gives you a strategic partner who stays close to the business as it evolves.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq5q" aria-expanded="false" aria-controls="faq5a">
+          How are your fees structured?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq5a" role="region" aria-labelledby="faq5q">
+          <div class="faq-a-inner">We offer fixed-scope project fees, monthly advisory retainers, and where appropriate performance-based engagements tied to agreed outcomes. After the discovery call we recommend the structure that best fits your goals and budget. There are no hidden costs.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq6q" aria-expanded="false" aria-controls="faq6a">
+          How are engagements measured and reported?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq6a" role="region" aria-labelledby="faq6q">
+          <div class="faq-a-inner">Every engagement starts with defined success metrics revenue, cost, efficiency, or team performance. We report against them throughout, so you always know what's working and what the work is worth.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<div class="cta-wrap">
+  <div class="cta-band reveal">
+    <div class="cta-inner">
+      <h2>Less guesswork. More growth.</h2>
+      <p>Book a complimentary 30-minute discovery call. We'll discuss your goals and outline exactly how we can help.</p>
+      <a href="#contact" class="btn btn-primary">Book Discovery Call &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact" aria-label="Contact us">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Get in Touch</span>
+      <h3 style="margin-top:16px;">Let's start the conversation.</h3>
+      <div class="ci-item"><div class="ci-ico" aria-hidden="true">@</div><div><div class="lbl">Email</div><div class="val" id="ci-email">&mdash;</div></div></div>
+      <div class="ci-item"><div class="ci-ico" aria-hidden="true">#</div><div><div class="lbl">Phone</div><div class="val" id="ci-phone">&mdash;</div></div></div>
+      <div class="ci-item"><div class="ci-ico" aria-hidden="true">&loz;</div><div><div class="lbl">Office</div><div class="val" id="ci-location">&mdash;</div></div></div>
+      <div class="ci-item"><div class="ci-ico" aria-hidden="true">&#9201;</div><div><div class="lbl">Hours</div><div class="val" id="ci-hours">&mdash;</div></div></div>
+    </div>
+    <form class="reveal" id="contactForm" novalidate>
+      <div class="field-row">
+        <label class="fld"><span>Full name</span><input type="text" name="name" placeholder="Jane Doe" required></label>
+        <label class="fld"><span>Email address</span><input type="email" name="email" placeholder="jane@company.com" required></label>
+      </div>
+      <label class="fld"><span>Company</span><input type="text" name="company" placeholder="Company name"></label>
+      <label class="fld"><span>How can we help?</span><textarea name="message" placeholder="Tell us about your business and goals…" required></textarea></label>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo"><span class="mark" aria-hidden="true">5</span> THE DISTINCT 5</div>
+      <p class="f-about">Business consultancy and advisory services combining expertise, systems, and people to build scalable, sustainable companies.</p>
+    </div>
+    <nav aria-label="Explore">
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="ai-in-b2b.html">AI in B2B</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Services">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">Business Strategy</a></li>
+        <li><a href="#services">Financial Advisory</a></li>
+        <li><a href="#services">Operations</a></li>
+        <li><a href="#contact">Fractional Executive</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 THE DISTINCT 5 Ltd. All rights reserved.</span>
+    <span>Clarity &middot; Strategy &middot; Measurable Growth</span>
+  </div>
+</footer>
+
+<!-- ============ THREE.JS (3D hero) ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------------------------------------------------------------
+   SITE CONFIG public business contact details only.
+   No secrets, API keys or credentials are stored in client code.
+   In production, load any sensitive values from a secure backend
+   or environment variables, never hard-coded into the page.
+----------------------------------------------------------------*/
+const SITE_CONFIG = {
+  email: 'hello@thedistinct5.com',
+  phone: '+44 (0) 75 2185 9459',
+  location: 'United Kingdom',
+  hours: 'Mon – Fri, 9:00 – 17:00'
+};
+
+/* ---- Inject contact details (kept out of static markup) ---- */
+(function () {
+  const map = { 'ci-email': 'email', 'ci-phone': 'phone', 'ci-location': 'location', 'ci-hours': 'hours' };
+  for (const id in map) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = SITE_CONFIG[map[id]];
+  }
+})();
+
+/* ---- Header scroll state + scroll progress bar ---- */
+const header = document.getElementById('header');
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (window.scrollY / h * 100) + '%';
+}, { passive: true });
+
+/* ---- Mobile menu (accessible) ---- */
+const mm = document.getElementById('mobileMenu');
+const navToggle = document.getElementById('navToggle');
+function setMenu(open) {
+  mm.classList.toggle('open', open);
+  mm.setAttribute('aria-hidden', String(!open));
+  navToggle.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+navToggle.addEventListener('click', () => setMenu(true));
+document.getElementById('menuClose').addEventListener('click', () => setMenu(false));
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+/* ---- Scroll reveal + counters ---- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      if (e.target.matches('[data-count]')) runCounter(e.target);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.16 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+
+/* ---- Animated counter ---- */
+function runCounter(el) {
+  const target = parseFloat(el.dataset.count);
+  const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+  const dur = 1700, start = performance.now();
+  function step(t) {
+    const p = Math.min((t - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = pre + Math.round(target * eased) + suf;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ---- 3D tilt cards (JS-driven CSS 3D) ---- */
+const finePointer = window.matchMedia('(pointer:fine)').matches;
+if (finePointer) {
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      card.style.transform =
+        `perspective(900px) rotateX(${(0.5 - py) * 11}deg) rotateY(${(px - 0.5) * 13}deg) translateY(-8px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+}
+
+/* ---- FAQ accordion (accessible) ---- */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+    // Open this one
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ---- Contact form (no backend endpoint hard-coded) ---- */
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!this.checkValidity()) { this.reportValidity(); return; }
+  alert('Thank you. We will be in touch within one working day.');
+  this.reset();
+});
+
+/* ============ THREE.JS — interactive 3D hero ============ */
+(function initHero3D() {
+  if (typeof THREE === 'undefined') return;
+  const canvas = document.getElementById('hero3d');
+  const wrap = canvas.parentElement;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 4.4;
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const wire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.4, 1),
+    new THREE.MeshBasicMaterial({ color: 0x1e4fd1, wireframe: true, transparent: true, opacity: 0.6 })
+  );
+  group.add(wire);
+
+  const core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.92, 0),
+    new THREE.MeshBasicMaterial({ color: 0x1f9d6b, transparent: true, opacity: 0.14 })
+  );
+  group.add(core);
+
+  const nodes = new THREE.Points(
+    new THREE.IcosahedronGeometry(1.4, 1),
+    new THREE.PointsMaterial({ color: 0x1f9d6b, size: 0.085 })
+  );
+  group.add(nodes);
+
+  const N = 140, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N * 3; i++) pos[i] = (Math.random() - 0.5) * 8;
+  const field = new THREE.BufferGeometry();
+  field.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const particles = new THREE.Points(
+    field,
+    new THREE.PointsMaterial({ color: 0x5b7be8, size: 0.04, transparent: true, opacity: 0.75 })
+  );
+  scene.add(particles);
+
+  function resize() {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let mx = 0, my = 0;
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX / window.innerWidth - 0.5;
+    my = e.clientY / window.innerHeight - 0.5;
+  });
+
+  (function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.004;
+    group.rotation.x += 0.0015;
+    nodes.rotation.y -= 0.001;
+    particles.rotation.y += 0.0006;
+    camera.position.x += (mx * 0.9 - camera.position.x) * 0.04;
+    camera.position.y += (-my * 0.9 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  })();
+})();
+</script>
+</body>
+</html>

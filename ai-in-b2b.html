@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Use AI in B2B | THE DISTINCT 5 Ltd</title>
+<meta name="description" content="A practical guide for business leaders on integrating artificial intelligence into B2B operations use cases, framework, pitfalls and a 12-month roadmap.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root {
+    --white:#ffffff;
+    --paper:#f6f7fb;
+    --paper-2:#eef1f8;
+    --bg:#eef2fd;
+    --bg-2:#e3e9fa;
+    --ink:#0d1426;
+    --ink-soft:#525b70;
+    --line:#e6e8f1;
+    --blue:#1e4fd1;
+    --blue-dk:#1739a6;
+    --blue-lt:#5b7be8;
+    --blue-soft:#eef2fd;
+    --navy:#0b1530;
+    --green:#1f9d6b;
+    --green-lt:#39c489;
+    --green-soft:#e9f7f1;
+    --font-display:'Sora',sans-serif;
+    --font-head:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --grad-brand:linear-gradient(120deg,#1e4fd1,#1f9d6b);
+    --grad-btn:linear-gradient(120deg,#2a5be0,#1739a6);
+    --grad-cta:linear-gradient(135deg,#0b1530 0%,#13266b 55%,#1e4fd1 135%);
+    --shadow-xs:0 2px 8px rgba(13,20,38,.05);
+    --shadow-sm:0 8px 24px rgba(13,20,38,.07);
+    --shadow-md:0 20px 48px rgba(13,20,38,.10);
+    --shadow-lg:0 36px 80px rgba(13,20,38,.18);
+    --radius:18px;
+    --ease:cubic-bezier(.22,.68,.2,1);
+  }
+
+  /* ============ RESET ============ */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.75;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; }
+  ::selection { background:rgba(30,79,209,.16); }
+
+  /* ---- Accessible focus states ---- */
+  a:focus-visible, button:focus-visible {
+    outline:3px solid var(--blue); outline-offset:3px; border-radius:6px;
+  }
+  .skip-link {
+    position:absolute; left:50%; transform:translateX(-50%) translateY(-140%);
+    top:10px; z-index:3000; background:var(--ink); color:#fff;
+    padding:12px 22px; border-radius:50px; font-family:var(--font-head);
+    font-weight:600; font-size:14px; transition:transform .25s var(--ease);
+  }
+  .skip-link:focus { transform:translateX(-50%) translateY(0); }
+
+  /* ============ KEYFRAMES ============ */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(40px,-30px) scale(1.12);} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-50px,40px) scale(1.18);} }
+
+  /* ============ SCROLL PROGRESS ============ */
+  .progress {
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--grad-brand); z-index:2000; box-shadow:0 0 12px rgba(30,79,209,.5);
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    padding:16px 5%;
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(255,255,255,.74);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid transparent;
+    transition:padding .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  }
+  header.scrolled { padding:10px 5%; box-shadow:var(--shadow-xs); border-bottom:1px solid var(--line); }
+  .logo {
+    font-family:var(--font-display); font-weight:800; font-size:19px; letter-spacing:1.5px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .logo .mark {
+    width:30px; height:30px; border-radius:9px;
+    background:var(--grad-brand); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:15px; font-weight:800;
+    box-shadow:0 6px 16px rgba(30,79,209,.4);
+    transition:transform .5s var(--ease);
+  }
+  .logo:hover .mark { transform:rotate(180deg) scale(1.08); }
+  nav ul { display:flex; gap:30px; list-style:none; }
+  nav a { font-size:14px; font-weight:500; color:var(--ink-soft); position:relative; transition:color .2s; }
+  nav a::after {
+    content:''; position:absolute; left:0; bottom:-6px;
+    width:0; height:2px; background:var(--grad-brand); transition:width .3s var(--ease);
+  }
+  nav a:hover { color:var(--ink); }
+  nav a:hover::after, nav a.active::after { width:100%; }
+  nav a.active { color:var(--ink); }
+
+  .btn {
+    font-family:var(--font-head);
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; font-size:14px; font-weight:600;
+    letter-spacing:.3px; border-radius:50px; cursor:pointer;
+    border:1px solid transparent; position:relative; overflow:hidden;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .btn-primary { background:var(--grad-btn); color:#fff; box-shadow:0 10px 26px rgba(30,79,209,.34); }
+  .btn-primary::before {
+    content:''; position:absolute; top:0; left:-120%;
+    width:60%; height:100%; transform:skewX(-20deg);
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+    transition:left .6s var(--ease);
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(30,79,209,.46); }
+  .btn-primary:hover::before { left:130%; }
+  .btn-ghost { background:var(--white); color:var(--ink); border:1px solid var(--line); box-shadow:var(--shadow-xs); }
+  .btn-ghost:hover { transform:translateY(-3px); border-color:var(--blue); color:var(--blue); }
+  .nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+  .nav-toggle span { width:24px; height:2px; background:var(--ink); border-radius:2px; }
+
+  /* ============ LAYOUT ============ */
+  section { padding:110px 5%; position:relative; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .narrow { max-width:820px; margin:0 auto; }
+  .eyebrow {
+    font-family:var(--font-mono);
+    font-size:12px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--blue); display:inline-flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before { content:''; width:24px; height:2px; background:var(--grad-brand); }
+  .section-head { max-width:680px; margin:0 auto 56px; text-align:center; }
+  .section-head .eyebrow { justify-content:center; margin-bottom:18px; }
+  .section-head h2 {
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(28px,4vw,42px); line-height:1.14;
+    letter-spacing:-.8px; margin-bottom:14px;
+  }
+  .section-head p { color:var(--ink-soft); font-size:16px; }
+  .grad-text { background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ============ REVEAL / MOTION ============ */
+  .reveal { opacity:0; transform:translateY(34px); transition:opacity .7s ease, transform .7s var(--ease); }
+  .reveal.in { opacity:1; transform:translateY(0); }
+  .stagger > .reveal:nth-child(2) { transition-delay:.08s; }
+  .stagger > .reveal:nth-child(3) { transition-delay:.16s; }
+  .stagger > .reveal:nth-child(4) { transition-delay:.24s; }
+  .stagger > .reveal:nth-child(5) { transition-delay:.32s; }
+  .stagger > .reveal:nth-child(6) { transition-delay:.40s; }
+  .stagger > .reveal:nth-child(7) { transition-delay:.48s; }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height:88vh; padding-top:150px;
+    display:flex; align-items:center;
+    background:
+      radial-gradient(38% 50% at 86% 18%, rgba(31,157,107,.14), transparent 72%),
+      radial-gradient(42% 55% at 8% 82%, rgba(30,79,209,.13), transparent 72%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .blob { position:absolute; border-radius:50%; filter:blur(70px); z-index:0; }
+  .blob-1 { width:420px; height:420px; top:-60px; right:-60px;
+    background:radial-gradient(circle,rgba(30,79,209,.30),transparent 68%); animation:float1 18s ease-in-out infinite; }
+  .blob-2 { width:360px; height:360px; bottom:-120px; left:-80px;
+    background:radial-gradient(circle,rgba(31,157,107,.28),transparent 68%); animation:float2 22s ease-in-out infinite; }
+  .hero-grid {
+    max-width:1180px; margin:0 auto; width:100%;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:50px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .hero-copy .eyebrow { margin-bottom:24px; animation:fadeUp .8s .05s both; }
+  .hero h1 {
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(36px,5vw,62px); line-height:1.06;
+    letter-spacing:-1.4px; margin-bottom:22px; animation:fadeUp .9s .15s both;
+  }
+  .hero p { font-size:18px; color:var(--ink-soft); max-width:520px; margin-bottom:32px; animation:fadeUp .9s .3s both; }
+  .hero-cta { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp .9s .45s both; }
+  .hero-visual { position:relative; height:460px; animation:fadeUp 1s .35s both; }
+  .hero-visual::before {
+    content:''; position:absolute; inset:8% 10%;
+    background:var(--grad-brand); border-radius:50%; filter:blur(80px); opacity:.26; z-index:0;
+  }
+  #hero3d { position:relative; z-index:1; width:100%; height:100%; }
+  .hv-badge {
+    position:absolute; z-index:3; background:rgba(255,255,255,.85);
+    backdrop-filter:blur(10px); border:1px solid var(--line);
+    border-radius:14px; padding:12px 16px; box-shadow:var(--shadow-md);
+    font-family:var(--font-head); font-weight:600; font-size:13px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .hv-badge .dot { width:9px; height:9px; border-radius:50%; }
+  .hv-badge.b1 { top:10%; left:-4%; animation:float1 9s ease-in-out infinite; }
+  .hv-badge.b2 { bottom:14%; right:-4%; animation:float2 11s ease-in-out infinite; }
+
+  /* ============ INTRO ============ */
+  .intro { background:var(--bg-2); }
+  .intro p { font-size:18px; color:var(--ink-soft); }
+  .intro p + p { margin-top:18px; }
+  .intro .lead-mark { font-family:var(--font-display); font-weight:800; color:var(--ink); font-size:20px; }
+
+  /* ============ WHY AI STATS ============ */
+  .why-ai { background:var(--bg); }
+  .grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:24px; }
+  .stat-card {
+    padding:34px 26px; border-radius:var(--radius); text-align:center;
+    background:linear-gradient(165deg,var(--white),var(--paper));
+    border:1px solid var(--line);
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .7s ease;
+  }
+  .stat-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-md); }
+  .stat-card .num {
+    font-family:var(--font-display); font-weight:800; font-size:46px; line-height:1;
+    background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat-card h4 { font-family:var(--font-head); font-weight:600; font-size:16px; margin:14px 0 6px; }
+  .stat-card p { font-size:13.5px; color:var(--ink-soft); }
+
+  /* ============ USE CASES (3D tilt) ============ */
+  .usecases { background:linear-gradient(180deg,var(--bg),var(--bg-2)); }
+  .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:26px; }
+  .tilt {
+    transform-style:preserve-3d;
+    transition:transform .35s var(--ease), box-shadow .35s ease, opacity .7s ease;
+    will-change:transform;
+  }
+  .uc {
+    padding:34px 30px; border-radius:var(--radius);
+    background:var(--white); border:1px solid var(--line);
+    box-shadow:var(--shadow-sm); position:relative; overflow:hidden;
+  }
+  .uc::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad-brand); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease);
+  }
+  .uc:hover { box-shadow:var(--shadow-lg); }
+  .uc:hover::before { transform:scaleX(1); }
+  .uc-num {
+    font-family:var(--font-display); font-weight:800; font-size:34px;
+    background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-bottom:12px; transform:translateZ(40px);
+  }
+  .uc h3 { font-family:var(--font-head); font-weight:600; font-size:19px; margin-bottom:9px; transform:translateZ(26px); }
+  .uc p { color:var(--ink-soft); font-size:14.5px; margin-bottom:16px; transform:translateZ(14px); }
+  .tag {
+    font-family:var(--font-mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--green); background:var(--green-soft); border:1px solid #cdebdd;
+    border-radius:50px; padding:5px 12px; display:inline-block; transform:translateZ(20px);
+  }
+
+  /* ============ FRAMEWORK ============ */
+  .framework { background:var(--bg-2); }
+  .steps { position:relative; display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+  .steps::before {
+    content:''; position:absolute; top:34px; left:8%; right:8%; height:2px;
+    background:linear-gradient(90deg,var(--blue),var(--green));
+  }
+  .step { text-align:center; }
+  .step-badge {
+    width:68px; height:68px; margin:0 auto 22px; border-radius:50%;
+    background:var(--white); border:2px solid var(--green);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:800; font-size:20px;
+    color:var(--green); position:relative; z-index:2;
+    transition:transform .35s var(--ease), box-shadow .35s ease, background .35s, color .35s;
+  }
+  .step:hover .step-badge {
+    transform:translateY(-8px) scale(1.08);
+    box-shadow:0 14px 28px rgba(31,157,107,.34);
+    background:var(--green); color:#fff;
+  }
+  .step h4 { font-family:var(--font-head); font-weight:600; font-size:16px; margin-bottom:8px; }
+  .step p { font-size:13px; color:var(--ink-soft); }
+
+  /* ============ PITFALLS ============ */
+  .pitfalls { background:var(--bg); }
+  .pitfall {
+    display:grid; grid-template-columns:56px 1fr; gap:20px; align-items:start;
+    padding:24px 26px; border-radius:var(--radius); border:1px solid var(--line);
+    background:linear-gradient(160deg,var(--white),var(--paper));
+    margin-bottom:14px; transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .7s ease;
+  }
+  .pitfall:hover { transform:translateX(8px); box-shadow:var(--shadow-md); }
+  .pitfall-ico {
+    width:48px; height:48px; border-radius:13px;
+    background:var(--grad-btn); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:800; font-size:20px;
+    box-shadow:0 10px 22px rgba(30,79,209,.3);
+  }
+  .pitfall h4 { font-family:var(--font-head); font-weight:600; font-size:17px; margin-bottom:5px; }
+  .pitfall p { color:var(--ink-soft); font-size:14px; }
+
+  /* ============ BIG QUOTE (no attribution) ============ */
+  .bigquote { background:var(--grad-cta); color:#fff; text-align:center; overflow:hidden; }
+  .bigquote::before, .bigquote::after { content:''; position:absolute; border-radius:50%; filter:blur(70px); }
+  .bigquote::before { width:320px; height:320px; background:rgba(30,79,209,.5); top:-130px; left:-60px; animation:float1 17s ease-in-out infinite; }
+  .bigquote::after { width:300px; height:300px; background:rgba(31,157,107,.42); bottom:-140px; right:-60px; animation:float2 21s ease-in-out infinite; }
+  .bigquote .qm {
+    font-family:var(--font-display); font-weight:800; font-size:90px; line-height:.4;
+    background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent;
+    position:relative; z-index:2;
+  }
+  .bigquote blockquote {
+    position:relative; z-index:2; max-width:860px; margin:24px auto 0;
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(22px,3.2vw,34px); line-height:1.38; letter-spacing:-.4px;
+  }
+
+  /* ============ ROADMAP ============ */
+  .roadmap { background:linear-gradient(180deg,var(--bg-2),var(--bg)); }
+  .roadmap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .horizon {
+    padding:36px 30px; border-radius:var(--radius);
+    background:var(--white); border:1px solid var(--line); box-shadow:var(--shadow-sm);
+    position:relative; overflow:hidden;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .7s ease;
+  }
+  .horizon:hover { transform:translateY(-8px); box-shadow:var(--shadow-lg); }
+  .horizon::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--grad-brand); }
+  .horizon-label {
+    font-family:var(--font-mono); font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--blue); margin-bottom:8px;
+  }
+  .horizon h4 { font-family:var(--font-display); font-weight:700; font-size:20px; margin-bottom:18px; }
+  .horizon ul { list-style:none; }
+  .horizon li {
+    font-size:14px; color:var(--ink-soft); padding:9px 0 9px 24px; position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .horizon li:last-child { border-bottom:none; }
+  .horizon li::before {
+    content:''; position:absolute; left:0; top:16px;
+    width:10px; height:10px; border-radius:50%; background:var(--grad-brand);
+  }
+
+  /* ============ FAQ ACCORDION ============ */
+  .faq { background:var(--bg); }
+  .faq-list { max-width:820px; margin:0 auto; }
+  .faq-item {
+    border:1px solid var(--line); border-radius:14px;
+    background:var(--white); margin-bottom:14px; overflow:hidden;
+    transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .faq-item.open { border-color:var(--blue); box-shadow:var(--shadow-sm); }
+  .faq-q {
+    width:100%; text-align:left; cursor:pointer; background:none; border:none;
+    padding:24px 26px; display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:var(--font-head); font-weight:600; font-size:16.5px; color:var(--ink);
+  }
+  .faq-icon {
+    width:30px; height:30px; flex-shrink:0; border-radius:9px;
+    background:var(--blue-soft); color:var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:600; transition:transform .35s var(--ease), background .3s, color .3s;
+  }
+  .faq-item.open .faq-icon { transform:rotate(135deg); background:var(--grad-btn); color:#fff; }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height .4s var(--ease); }
+  .faq-a-inner { padding:0 26px 24px; color:var(--ink-soft); font-size:14.5px; }
+
+  /* ============ CTA ============ */
+  .cta-wrap { padding:120px 0; }
+  .cta-band {
+    margin:0 5%; border-radius:28px;
+    background:var(--grad-cta); color:#fff; text-align:center;
+    padding:80px 6%; position:relative; overflow:hidden;
+  }
+  .cta-band::before, .cta-band::after { content:''; position:absolute; border-radius:50%; filter:blur(60px); }
+  .cta-band::before { width:300px; height:300px; background:rgba(30,79,209,.5); top:-120px; left:-60px; animation:float1 16s ease-in-out infinite; }
+  .cta-band::after { width:280px; height:280px; background:rgba(31,157,107,.42); bottom:-120px; right:-50px; animation:float2 20s ease-in-out infinite; }
+  .cta-inner { position:relative; z-index:2; }
+  .cta-band h2 { font-family:var(--font-display); font-weight:800; font-size:clamp(28px,4vw,44px); letter-spacing:-.8px; margin-bottom:14px; }
+  .cta-band p { color:rgba(255,255,255,.82); max-width:540px; margin:0 auto 30px; }
+  .cta-band .btn-primary { background:var(--white); color:var(--navy); box-shadow:0 14px 34px rgba(0,0,0,.3); }
+
+  /* ============ FOOTER ============ */
+  footer { background:var(--navy); color:rgba(255,255,255,.72); padding:64px 5% 32px; position:relative; overflow:hidden; }
+  footer::before {
+    content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+    width:600px; height:300px; background:radial-gradient(circle,rgba(30,79,209,.3),transparent 70%); filter:blur(40px);
+  }
+  .footer-grid {
+    max-width:1180px; margin:0 auto; position:relative; z-index:2;
+    display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  footer .logo { color:#fff; margin-bottom:16px; }
+  footer .f-about { font-size:14px; max-width:300px; }
+  footer h5 { font-family:var(--font-head); color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px; }
+  footer ul { list-style:none; display:grid; gap:10px; }
+  footer ul a { font-size:14px; transition:color .2s; }
+  footer ul a:hover { color:var(--green-lt); }
+  .footer-bottom {
+    max-width:1180px; margin:24px auto 0; position:relative; z-index:2;
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:13px;
+  }
+
+  /* ============ MOBILE MENU ============ */
+  .mobile-menu {
+    position:fixed; inset:0; z-index:1500;
+    background:rgba(255,255,255,.98); backdrop-filter:blur(12px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:26px; opacity:0; pointer-events:none; transition:opacity .3s var(--ease);
+  }
+  .mobile-menu.open { opacity:1; pointer-events:auto; }
+  .mobile-menu a { font-family:var(--font-display); font-weight:700; font-size:24px; }
+  .mobile-menu .close { position:absolute; top:24px; right:6%; background:none; border:none; font-size:34px; cursor:pointer; color:var(--ink); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:980px) {
+    .hero-grid { grid-template-columns:1fr; gap:40px; }
+    .hero-visual { height:360px; order:-1; }
+    .steps { grid-template-columns:repeat(2,1fr); gap:30px; }
+    .steps::before { display:none; }
+    .roadmap-grid { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:680px) {
+    nav ul, header .btn { display:none; }
+    .nav-toggle { display:flex; }
+    section { padding:80px 5%; }
+    .steps { grid-template-columns:1fr; }
+    .pitfall { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *, *::before, *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+    .reveal { opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header id="header">
+  <a href="index.html" class="logo" aria-label="THE DISTINCT 5 home"><span class="mark" aria-hidden="true">5</span> THE DISTINCT 5</a>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#process">Process</a></li>
+      <li><a href="ai-in-b2b.html" class="active" aria-current="page">AI in B2B</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="index.html#contact" class="btn btn-primary">Book a Call</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="close" id="menuClose" aria-label="Close menu">&times;</button>
+  <a href="index.html#about">About</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#process">Process</a>
+  <a href="ai-in-b2b.html">AI in B2B</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Introduction">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Advisory Insight</span>
+      <h1>How to Use <span class="grad-text">AI in B2B</span></h1>
+      <p>A practical guide for business leaders on integrating artificial intelligence into B2B operations from first pilot to enterprise advantage.</p>
+      <div class="hero-cta">
+        <a href="#intro" class="btn btn-primary">Explore the Guide &darr;</a>
+        <a href="index.html#contact" class="btn btn-ghost">Talk to an Advisor</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="hero3d" aria-hidden="true"></canvas>
+      <div class="hv-badge b1" aria-hidden="true"><span class="dot" style="background:var(--blue)"></span> Strategy</div>
+      <div class="hv-badge b2" aria-hidden="true"><span class="dot" style="background:var(--green)"></span> Intelligence</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="intro" aria-label="Introduction to AI in B2B">
+  <div class="narrow reveal">
+    <p><span class="lead-mark">Artificial intelligence has shifted from experiment to expectation.</span> In B2B, where sales cycles are longer, accounts are higher value, and decisions involve multiple stakeholders, the right AI strategy can compound advantage across every function from marketing and sales to operations, finance, and customer success.</p>
+    <p>The companies winning with AI aren't the ones with the most tools. They're the ones treating AI as a structured business capability guided by clear goals, owned by senior leaders, and measured by outcomes.</p>
+  </div>
+</section>
+
+<!-- ============ WHY AI MATTERS ============ -->
+<section class="why-ai" id="why-ai" aria-label="Why AI matters">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why It Matters</span>
+      <h2>B2B is where AI delivers <span class="grad-text">outsized leverage</span></h2>
+      <p>Data-rich, relationship-heavy, and process-driven three conditions where AI compounds advantage.</p>
+    </div>
+    <div class="grid-4 stagger">
+      <div class="stat-card reveal"><div class="num" data-count="3" data-suffix="x">0</div><h4>Faster Sales Cycles</h4><p>AI-assisted prospecting, scoring, and outreach compress weeks of work into days.</p></div>
+      <div class="stat-card reveal"><div class="num" data-count="40" data-suffix="%">0</div><h4>Cost Reduction</h4><p>Automating repetitive workflows frees teams for higher-value work.</p></div>
+      <div class="stat-card reveal"><div class="num" data-count="2" data-suffix="x">0</div><h4>Pipeline Quality</h4><p>Predictive models surface the accounts most likely to convert.</p></div>
+      <div class="stat-card reveal"><div class="num">24/7</div><h4>Always-On Insight</h4><p>Continuous intelligence across customer data and market signals.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE CASES ============ -->
+<section class="usecases" id="usecases" aria-label="AI use cases">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Use Cases</span>
+      <h2>Where AI delivers <span class="grad-text">measurable value</span></h2>
+      <p>Seven high-impact applications across the B2B operating model.</p>
+    </div>
+    <div class="grid-3 stagger">
+      <article class="tilt uc reveal"><div class="uc-num">01</div><h3>Lead Generation &amp; Account Scoring</h3><p>Identify accounts that resemble your best customers and prioritise outreach shifting effort from volume to precision.</p><span class="tag">Sales</span></article>
+      <article class="tilt uc reveal"><div class="uc-num">02</div><h3>Personalised Outreach at Scale</h3><p>Generative AI drafts tailored emails and proposals grounded in CRM data preserving reps' time for human conversations.</p><span class="tag">Marketing &amp; Sales</span></article>
+      <article class="tilt uc reveal"><div class="uc-num">03</div><h3>Sales Forecasting</h3><p>Predictive analytics turn CRM data into reliable forecasts and surface at-risk deals early.</p><span class="tag">RevOps</span></article>
+      <article class="tilt uc reveal"><div class="uc-num">04</div><h3>Customer Success &amp; Retention</h3><p>Churn models flag at-risk accounts; recommendation engines guide CSMs to next-best actions.</p><span class="tag">Customer Success</span></article>
+      <article class="tilt uc reveal"><div class="uc-num">05</div><h3>Workflow Automation</h3><p>From invoice processing to contract review, AI compresses cycle times and reduces error rates.</p><span class="tag">Operations</span></article>
+      <article class="tilt uc reveal"><div class="uc-num">06</div><h3>Pricing &amp; Margin Optimisation</h3><p>Dynamic models recommend the price most likely to win at the margin you need.</p><span class="tag">Finance</span></article>
+      <article class="tilt uc reveal"><div class="uc-num">07</div><h3>Knowledge &amp; Decision Support</h3><p>Internal AI assistants make institutional knowledge searchable in seconds.</p><span class="tag">Enablement</span></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRAMEWORK ============ -->
+<section class="framework" id="framework" aria-label="Adoption framework">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Framework</span>
+      <h2>A 5-step path to <span class="grad-text">B2B adoption</span></h2>
+      <p>Our recommended route from interest to impact.</p>
+    </div>
+    <div class="steps stagger">
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">1</div><h4>Align on Strategy</h4><p>Define the business outcomes AI must drive revenue, margin, efficiency.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">2</div><h4>Audit Your Data</h4><p>Assess data quality, accessibility, and governance. AI is only as good as its data.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">3</div><h4>Pilot with Purpose</h4><p>Choose one high-value use case with clear metrics. Prove before you scale.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">4</div><h4>Operationalise</h4><p>Embed AI into daily workflows, build training, assign ownership.</p></div>
+      <div class="step reveal"><div class="step-badge" aria-hidden="true">5</div><h4>Govern &amp; Scale</h4><p>Establish policies, monitor outputs, expand function by function.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PITFALLS ============ -->
+<section class="pitfalls" aria-label="Common pitfalls">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Watch Out</span>
+      <h2>Common pitfalls to <span class="grad-text">avoid</span></h2>
+      <p>The mistakes we see most often when firms approach AI without a plan.</p>
+    </div>
+    <div class="narrow stagger">
+      <div class="pitfall reveal"><div class="pitfall-ico" aria-hidden="true">!</div><div><h4>Tool-First Thinking</h4><p>Buying AI software before defining the problem it must solve. Strategy precedes technology always.</p></div></div>
+      <div class="pitfall reveal"><div class="pitfall-ico" aria-hidden="true">!</div><div><h4>Poor Data Foundations</h4><p>Inconsistent CRM hygiene, siloed systems, and unclear ownership cripple even the best models.</p></div></div>
+      <div class="pitfall reveal"><div class="pitfall-ico" aria-hidden="true">!</div><div><h4>No Clear Owner</h4><p>AI initiatives without a senior sponsor lose momentum, budget, and accountability within months.</p></div></div>
+      <div class="pitfall reveal"><div class="pitfall-ico" aria-hidden="true">!</div><div><h4>Skipping Change Management</h4><p>Technology only delivers when teams adopt it. Training and incentives matter as much as the model.</p></div></div>
+      <div class="pitfall reveal"><div class="pitfall-ico" aria-hidden="true">!</div><div><h4>Ignoring Governance</h4><p>Privacy, compliance, and IP exposure must be designed in not retrofitted after a breach.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIG QUOTE (attribution removed) ============ -->
+<section class="bigquote" aria-label="Key insight">
+  <div class="reveal">
+    <div class="qm" aria-hidden="true">&ldquo;</div>
+    <blockquote>In B2B, AI doesn't replace relationships it amplifies the firms that know how to use it to deepen them.</blockquote>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section class="roadmap" id="roadmap" aria-label="12-month roadmap">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Roadmap</span>
+      <h2>Your 12-month <span class="grad-text">plan</span></h2>
+      <p>A realistic horizon plan for the typical mid-market B2B firm.</p>
+    </div>
+    <div class="roadmap-grid stagger">
+      <div class="horizon reveal">
+        <div class="horizon-label">Months 0 – 3</div>
+        <h4>Foundations</h4>
+        <ul><li>AI readiness assessment</li><li>Data audit &amp; cleanup</li><li>Governance framework</li><li>Identify first pilots</li></ul>
+      </div>
+      <div class="horizon reveal">
+        <div class="horizon-label">Months 4 – 8</div>
+        <h4>Pilot &amp; Prove</h4>
+        <ul><li>Deploy 2 – 3 use cases</li><li>Measure against KPIs</li><li>Train pilot teams</li><li>Document learnings</li></ul>
+      </div>
+      <div class="horizon reveal">
+        <div class="horizon-label">Months 9 – 12</div>
+        <h4>Scale &amp; Embed</h4>
+        <ul><li>Roll out across functions</li><li>Build internal AI literacy</li><li>Refine governance</li><li>Plan year two</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq" aria-label="Frequently asked questions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions? Answers.</span>
+      <h2>AI adoption <span class="grad-text">questions</span></h2>
+      <p>What B2B leaders ask us most about getting started with AI.</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" id="faq1q" aria-expanded="false" aria-controls="faq1a">
+          How long before AI delivers measurable ROI?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq1a" role="region" aria-labelledby="faq1q">
+          <div class="faq-a-inner">A focused pilot typically shows measurable results within one to two quarters. The key is choosing a high-value use case with clear metrics up front efficiency, conversion, or cost so impact is visible before you scale.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq2q" aria-expanded="false" aria-controls="faq2a">
+          Do we need a large data team to get started?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq2a" role="region" aria-labelledby="faq2q">
+          <div class="faq-a-inner">No. <br>Most B2B firms begin with the data they already hold in their CRM and core systems. What matters more than team size is data quality and a clear owner. We help you assess readiness and start at the right scale.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq3q" aria-expanded="false" aria-controls="faq3a">
+          Is our data secure when using AI tools?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq3a" role="region" aria-labelledby="faq3q">
+          <div class="faq-a-inner">It can be with the right governance. That means clear policies on what data is used, vendor due diligence, access controls, and human-in-the-loop safeguards. Security and compliance should be designed into the rollout from day one, not retrofitted later.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" id="faq4q" aria-expanded="false" aria-controls="faq4a">
+          Should we build custom AI or buy off-the-shelf?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq4a" role="region" aria-labelledby="faq4q">
+          <div class="faq-a-inner">Most firms should start with proven off-the-shelf tools for common use cases, and reserve custom builds for genuine competitive differentiators. The decision should follow your strategy we help you map each use case to the right approach.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<div class="cta-wrap">
+  <div class="cta-band reveal">
+    <div class="cta-inner">
+      <h2>Make AI a business advantage</h2>
+      <p>THE DISTINCT 5 helps B2B firms design AI strategies that move revenue, margin, and capability. Book a complimentary strategy session.</p>
+      <a href="index.html#contact" class="btn btn-primary">Book Strategy Session &rarr;</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo"><span class="mark" aria-hidden="true">5</span> THE DISTINCT 5</div>
+      <p class="f-about">Business consultancy and advisory services combining expertise, systems, and people to build scalable, sustainable companies.</p>
+    </div>
+    <nav aria-label="Explore">
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#process">Process</a></li>
+        <li><a href="ai-in-b2b.html">AI in B2B</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="This guide">
+      <h5>This Guide</h5>
+      <ul>
+        <li><a href="#why-ai">Why It Matters</a></li>
+        <li><a href="#usecases">Use Cases</a></li>
+        <li><a href="#framework">Framework</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 THE DISTINCT 5 Ltd. All rights reserved.</span>
+    <span>Clarity &middot; Strategy &middot; Measurable Growth</span>
+  </div>
+</footer>
+
+<!-- ============ THREE.JS (3D hero) ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------------------------------------------------------------
+   No secrets, API keys or credentials are stored in client code.
+   Any sensitive values should be served from a secure backend.
+----------------------------------------------------------------*/
+
+/* ---- Header scroll + progress bar ---- */
+const header = document.getElementById('header');
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (window.scrollY / h * 100) + '%';
+}, { passive: true });
+
+/* ---- Mobile menu (accessible) ---- */
+const mm = document.getElementById('mobileMenu');
+const navToggle = document.getElementById('navToggle');
+function setMenu(open) {
+  mm.classList.toggle('open', open);
+  mm.setAttribute('aria-hidden', String(!open));
+  navToggle.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+navToggle.addEventListener('click', () => setMenu(true));
+document.getElementById('menuClose').addEventListener('click', () => setMenu(false));
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+/* ---- Scroll reveal + counters ---- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      if (e.target.matches('[data-count]')) runCounter(e.target);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.16 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+
+function runCounter(el) {
+  const target = parseFloat(el.dataset.count);
+  const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+  const dur = 1600, start = performance.now();
+  function step(t) {
+    const p = Math.min((t - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = pre + Math.round(target * eased) + suf;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ---- 3D tilt cards ---- */
+if (window.matchMedia('(pointer:fine)').matches) {
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      card.style.transform =
+        `perspective(900px) rotateX(${(0.5 - py) * 11}deg) rotateY(${(px - 0.5) * 13}deg) translateY(-8px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+}
+
+/* ---- FAQ accordion (accessible) ---- */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ============ THREE.JS interactive 3D hero ============ */
+(function initHero3D() {
+  if (typeof THREE === 'undefined') return;
+  const canvas = document.getElementById('hero3d');
+  const wrap = canvas.parentElement;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 4.6;
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const knot = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(1.05, 0.34, 140, 18),
+    new THREE.MeshBasicMaterial({ color: 0x1e4fd1, wireframe: true, transparent: true, opacity: 0.62 })
+  );
+  group.add(knot);
+
+  const ring = new THREE.Mesh(
+    new THREE.TorusGeometry(1.7, 0.012, 8, 90),
+    new THREE.MeshBasicMaterial({ color: 0x1f9d6b, transparent: true, opacity: 0.5 })
+  );
+  ring.rotation.x = Math.PI / 2.4;
+  group.add(ring);
+
+  const nodes = new THREE.Points(
+    new THREE.TorusKnotGeometry(1.05, 0.34, 70, 10),
+    new THREE.PointsMaterial({ color: 0x1f9d6b, size: 0.06 })
+  );
+  group.add(nodes);
+
+  const N = 130, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N * 3; i++) pos[i] = (Math.random() - 0.5) * 8.5;
+  const field = new THREE.BufferGeometry();
+  field.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const particles = new THREE.Points(
+    field,
+    new THREE.PointsMaterial({ color: 0x5b7be8, size: 0.04, transparent: true, opacity: 0.75 })
+  );
+  scene.add(particles);
+
+  function resize() {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let mx = 0, my = 0;
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX / window.innerWidth - 0.5;
+    my = e.clientY / window.innerHeight - 0.5;
+  });
+
+  (function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.0042;
+    group.rotation.x += 0.0014;
+    ring.rotation.z += 0.004;
+    particles.rotation.y += 0.0006;
+    camera.position.x += (mx * 0.9 - camera.position.x) * 0.04;
+    camera.position.y += (-my * 0.9 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  })();
+})();
+</script>
+</body>
+</html>
