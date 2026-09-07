@@ -12,6 +12,7 @@ interface RowService {
   title: string;
   description: string;
   features: string[];
+  image: string;
   icon: string;
 }
 
@@ -108,7 +109,7 @@ const rowServices: RowService[] = [
       </div>
 
       <div class="real-state" style="display: none;">
-        {[...featureServices, ...rowServices.map(s => ({...s, tag: 'Core Service', image: ''}))].map((service, index) => (
+        {[...featureServices, ...rowServices.map(s => ({...s, tag: 'Core Service'}))].map((service, index) => (
           <article class="service-full-section reveal">
             {service.image && (
               <div class="sfs-media">
