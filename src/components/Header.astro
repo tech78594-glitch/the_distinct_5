@@ -1,0 +1,87 @@
+---
+import PWAInstallButton from './PWAInstallButton.astro';
+
+export interface Props {
+  activeNav?: string | null;
+}
+const { activeNav = null } = Astro.props;
+
+const links = [
+  { href: '/index.html#about', label: 'About' },
+  { href: '/services.html', label: 'Services', key: 'services' },
+  { href: '/how-we-work.html', label: 'Process', key: 'process' },
+  { href: '/index.html#news', label: 'News' },
+  { href: '/index.html#faq', label: 'FAQ' },
+  { href: '/index.html#contact', label: 'Contact' },
+];
+---
+
+<header id="header">
+  <a href="/index.html" class="logo" aria-label="THE DISTINCT 5 — home">
+    <img src="/images/company_logo.png" alt="The Distinct 5 Logo" loading="lazy" height="32" style="height: 32px; width: auto; max-width: 100%; object-fit: contain;" />
+  </a>
+  <nav aria-label="Primary">
+    <ul>
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={link.key === activeNav ? 'active' : ''}
+            aria-current={link.key === activeNav ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <PWAInstallButton />
+    <button id="theme-toggle" class="btn btn-ghost" aria-label="Toggle Dark Mode" style="padding: 4px; border: none; background: transparent;">
+      <span class="light-icon" style="font-size: 16px;">🌙</span>
+      <span class="dark-icon" style="display: none; font-size: 16px;">☀️</span>
+    </button>
+    <a href="/index.html#contact" class="btn btn-primary">Book a Call</a>
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  // Theme toggle logic
+  const themeToggle = document.getElementById('theme-toggle');
+  const lightIcon = themeToggle?.querySelector('.light-icon') as HTMLElement;
+  const darkIcon = themeToggle?.querySelector('.dark-icon') as HTMLElement;
+
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    if (lightIcon) lightIcon.style.display = 'none';
+    if (darkIcon) darkIcon.style.display = 'inline';
+  } else {
+    document.documentElement.classList.remove('dark');
+    if (lightIcon) lightIcon.style.display = 'inline';
+    if (darkIcon) darkIcon.style.display = 'none';
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    if (isDark) {
+      if (lightIcon) lightIcon.style.display = 'none';
+      if (darkIcon) darkIcon.style.display = 'inline';
+    } else {
+      if (lightIcon) lightIcon.style.display = 'inline';
+      if (darkIcon) darkIcon.style.display = 'none';
+    }
+  });
+</script>

@@ -1,0 +1,182 @@
+---
+interface FeatureService {
+  tag: string;
+  title: string;
+  description: string;
+  features: string[];
+  image: string;
+  icon: string;
+}
+
+interface RowService {
+  title: string;
+  description: string;
+  features: string[];
+  icon: string;
+}
+
+const featureServices: FeatureService[] = [
+  {
+    tag: 'Strategy & Operations',
+    title: 'Business Strategy & Operations Optimisation',
+    description:
+      "Growth planning and operational excellence, run from the same plan so the strategy you set is the strategy your business can actually deliver.",
+    features: [
+      'Growth & market-entry roadmaps, competitive positioning',
+      'Process mapping, efficiency programmes & waste reduction',
+      'Quarterly execution planning & performance tracking',
+    ],
+    image: '/images/img-strategy-ops.jpg',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>',
+  },
+  {
+    tag: 'Digital, Data & AI',
+    title: 'Digital Product, Data & Artificial Intelligence Development',
+    description:
+      'Product, data and AI capability built by people who understand the business behind it turned into tools that save time and create real advantage.',
+    features: [
+      'Digital product design, build & delivery',
+      'Data platforms, pipelines & reporting (BI/analytics)',
+      'Applied AI automation, insight & decision support',
+    ],
+    image: '/images/img-digital-ai.jpg',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>',
+  },
+];
+
+const rowServices: RowService[] = [
+  {
+    title: 'Financial Advisory & Marketing and Sales',
+    description:
+      'Financial discipline and commercial growth run from one plan protecting margin while building the pipeline that funds it.',
+    features: ['Cost control, cash-flow & turnaround strategy', 'Pipeline & demand generation, sales process design', 'Retention & recurring revenue'],
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>',
+  },
+  {
+    title: 'Leadership Development & Fractional Executive',
+    description:
+      'Capable, accountable leadership built from within backed by senior fractional CFO/COO support when you need it most.',
+    features: ['Org structure, executive coaching & culture design', 'Fractional CFO & COO leadership', 'Flexible, scalable engagement'],
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  },
+  {
+    title: 'Branding',
+    description: 'Identity and visual strategy that gives your business better visibility and lasting market presence.',
+    features: ['Brand identity & positioning', 'Visual language & guidelines', 'Market visibility strategy'],
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>',
+  },
+  {
+    title: 'Business Development',
+    description: 'New product introduction strategies and partnership frameworks that open fresh revenue channels.',
+    features: ['New product go-to-market', 'Partnership & channel development', 'Revenue diversification'],
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+  },
+];
+---
+
+<section class="services" id="services" aria-label="Our services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Services</span>
+      <h2>Engineered around your business</h2>
+      <p>Six connected capabilities, one advisory team tailored consultancy and ongoing support, each built for measurable impact.</p>
+    </div>
+
+    <div class="services-list" id="services-page-container">
+      <div class="skeleton-state" style="display: contents;">
+        {[1, 2, 3].map((item, i) => (
+          <article class="service-full-section" style={i % 2 === 1 ? 'flex-direction: row-reverse;' : ''}>
+            <div class="sfs-media skeleton"></div>
+            <div class="sfs-body">
+              <div class="skeleton skeleton-text" style="width: 120px; height: 16px; margin-bottom: 16px;"></div>
+              <div class="skeleton skeleton-text title" style="width: 65%; height: 32px; margin-bottom: 16px;"></div>
+              <div class="skeleton skeleton-text" style="max-width: 600px;"></div>
+              <div class="skeleton skeleton-text" style="max-width: 600px;"></div>
+              <div class="skeleton skeleton-text short" style="margin-bottom: 24px;"></div>
+              <ul class="feat" style="display: grid; gap: 12px; margin-top: 10px;">
+                <li class="skeleton skeleton-text" style="width: 90%;"></li>
+                <li class="skeleton skeleton-text" style="width: 80%;"></li>
+                <li class="skeleton skeleton-text" style="width: 85%;"></li>
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="real-state" style="display: none;">
+        {[...featureServices, ...rowServices.map(s => ({...s, tag: 'Core Service', image: ''}))].map((service, index) => (
+          <article class="service-full-section reveal">
+            {service.image && (
+              <div class="sfs-media">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  loading="lazy" 
+                  decoding="async" 
+                  width="800" 
+                  height="450" 
+                />
+              </div>
+            )}
+            <div class="sfs-body">
+              <span class="sfs-num">
+                <span class="sfs-icon" set:html={service.icon} />
+                {service.tag || 'Core Service'}
+              </span>
+              <h2>{service.title}</h2>
+              <p>{service.description}</p>
+              <ul class="feat">
+                {service.features.map((f) => <li>{f}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const container = document.getElementById('services-page-container');
+      if (container) {
+        const skel = container.querySelector('.skeleton-state') as HTMLElement;
+        const real = container.querySelector('.real-state') as HTMLElement;
+        if (skel) skel.style.display = 'none';
+        if (real) real.style.display = 'contents';
+      }
+    }, 800);
+  });
+</script>
+
+<style>
+  .services { background: var(--paper); padding-top: 60px; }
+  .services-list { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
+  .service-full-section { 
+    display: flex; 
+    flex-direction: column; 
+    background: var(--white); 
+    border: 1px solid var(--line); 
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (min-width: 980px) {
+    .service-full-section { flex-direction: row; align-items: stretch; }
+    .service-full-section:nth-child(even) { flex-direction: row-reverse; }
+    .sfs-media { width: 45%; border-bottom: none; border-right: 1px solid var(--line); }
+    .service-full-section:nth-child(even) .sfs-media { border-right: none; border-left: 1px solid var(--line); }
+    .sfs-body { width: 55%; padding: 60px; }
+  }
+  
+  .sfs-media { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .sfs-media img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%) contrast(1.05); }
+  .sfs-body { padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; }
+  .sfs-num {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--steel); display: flex; align-items: center; margin-bottom: 16px; gap: 8px;
+  }
+  .sfs-icon { display: flex; align-items: center; justify-content: center; color: var(--steel); }
+  .sfs-body h2 { font-family: var(--font-head); font-weight: 700; font-size: 28px; margin-bottom: 16px; color: var(--navy); }
+  .sfs-body p { color: var(--ink-soft); font-size: 16px; margin-bottom: 24px; max-width: 600px; }
+</style>

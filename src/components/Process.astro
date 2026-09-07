@@ -1,0 +1,110 @@
+---
+const steps = [
+  { n: '01', title: 'Discovery', body: 'A focused conversation to understand your goals, challenges, and current performance.', image: '/images/img-hero-consultant.jpg' },
+  { n: '02', title: 'Diagnose', body: 'Comprehensive audit of finances, operations, marketing, and team performance.', image: '/images/img-strategy-ops.jpg' },
+  { n: '03', title: 'Design', body: 'A tailored action plan with clear priorities, milestones, and success metrics.', image: '/images/img-about-team.png' },
+  { n: '04', title: 'Deliver', body: 'Hands-on implementation alongside your team not just recommendations.', image: '/images/img-digital-ai.jpg' },
+  { n: '05', title: 'Drive', body: 'Ongoing advisory to sustain results, refine strategy, and unlock the next stage of growth.', image: '/images/img-approach-bridge.jpg' },
+];
+---
+
+<section class="process" id="process" aria-label="How we work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How We Work</span>
+      <h2>From conversation to measurable result</h2>
+      <p>A clear, repeatable engagement model that keeps every project on track.</p>
+    </div>
+
+    <div class="steps-stack stagger">
+      {steps.map((step, index) => (
+        <article class={`step-row reveal ${index % 2 !== 0 ? 'reverse' : ''}`}>
+          <div class="step-media">
+            <img src={step.image} alt={step.title} loading="lazy" decoding="async" />
+          </div>
+          <div class="step-content">
+            <span class="step-n">{step.n}</span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process { background: var(--paper); padding: 80px 0; }
+  
+  .steps-stack { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
+  
+  .step-row {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  @media (min-width: 768px) {
+    .step-row {
+      flex-direction: row;
+      align-items: center;
+    }
+    .step-row.reverse {
+      flex-direction: row-reverse;
+    }
+  }
+  
+  .step-media {
+    flex: 1;
+    min-height: 250px;
+  }
+  
+  .step-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .step-content {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  @media (min-width: 768px) {
+    .step-content {
+      padding: 48px;
+    }
+  }
+  
+  .step-n {
+    font-family: var(--font-mono); 
+    font-size: 14px; 
+    color: var(--steel);
+    padding-bottom: 12px; 
+    margin-bottom: 16px; 
+    border-bottom: 2px solid var(--navy);
+    display: inline-block;
+  }
+  
+  .step-content h3 { 
+    font-family: var(--font-head); 
+    font-weight: 700; 
+    font-size: 24px; 
+    margin-bottom: 12px; 
+    color: var(--navy); 
+  }
+  
+  .step-content p { 
+    font-size: 15px; 
+    color: var(--ink-soft); 
+    line-height: 1.6;
+  }
+</style>

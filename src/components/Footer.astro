@@ -1,0 +1,65 @@
+---
+export interface Props {
+  variant?: 'home' | 'insight';
+}
+const { variant = 'home' } = Astro.props;
+---
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo"><img src="/images/company_logo.png" alt="The Distinct 5 Logo" loading="lazy" height="32" style="height: 32px; width: auto; max-width: 100%; object-fit: contain; background: white; padding: 4px 8px; border-radius: 4px;" class="footer-logo-img" /></div>
+      <p class="f-about">
+        Business consultancy and advisory services combining strategy, finance, marketing, leadership
+        and technology to build scalable, sustainable companies.
+      </p>
+      <div class="social-links">
+        <a href="https://linkedin.com/company/thedistinct5" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://twitter.com/thedistinct5" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+        </a>
+        <a href="https://youtube.com/@thedistinct5" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <nav aria-label="Explore">
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="/index.html#about">About</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/how-we-work.html">Process</a></li>
+        <li><a href="/index.html#faq">FAQ</a></li>
+        <li><a href="/ai-in-b2b.html">AI in B2B</a></li>
+      </ul>
+    </nav>
+    {variant === 'home' ? (
+      <nav aria-label="Services">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="/services.html">Business Strategy &amp; Operations</a></li>
+          <li><a href="/services.html">Digital Product, Data &amp; AI</a></li>
+          <li><a href="/services.html">Financial Advisory &amp; Marketing</a></li>
+          <li><a href="/services.html">Leadership &amp; Fractional Executive</a></li>
+          <li><a href="/services.html">Branding &amp; Business Development</a></li>
+        </ul>
+      </nav>
+    ) : (
+      <nav aria-label="This guide">
+        <h5>This Guide</h5>
+        <ul>
+          <li><a href="#why-ai">Why It Matters</a></li>
+          <li><a href="#usecases">Use Cases</a></li>
+          <li><a href="#framework">Framework</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    )}
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 THE DISTINCT 5 Ltd. All rights reserved.</span>
+    <span>Clarity &middot; Strategy &middot; Measurable Growth</span>
+  </div>
+</footer>
