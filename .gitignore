@@ -21,3 +21,10 @@ node_modules/
 
 # logs
 npm-debug.log*
+
+# css
+*.css.map
+
+# TypeScript
+*.tsbuildinfo
+*.ts
