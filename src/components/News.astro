@@ -1,4 +1,14 @@
 ---
+import { newsItems, HOME_NEWS_LIMIT, type NewsItem } from '../data/news';
+
+export interface Props {
+  /** Show every article (used on /news.html) instead of the homepage preview. */
+  showAll?: boolean;
+}
+const { showAll = false } = Astro.props;
+
+const items: NewsItem[] = showAll ? newsItems : newsItems.slice(0, HOME_NEWS_LIMIT);
+const hasMore = !showAll && newsItems.length > HOME_NEWS_LIMIT;
 ---
 
 <section class="insights" id="news" aria-label="News">
@@ -24,25 +34,27 @@
         </div>
         <div class="ir-arrow" aria-hidden="true" style="opacity: 0.2;">&rarr;</div>
       </div>
-      
+
       <div class="real-state" style="display: none; width: 100%;">
-        <a href="/ai-in-b2b.html" class="insight-row reveal">
-          <div class="ir-tag">Featured Guide</div>
-          <div class="ir-main">
-            <h3>How to Use AI in B2B</h3>
-            <p>
-              A practical guide for business leaders on integrating artificial intelligence into B2B
-              operations covering high-impact use cases, a 5-step adoption framework, common pitfalls,
-              and a realistic 12-month roadmap.
-            </p>
+        {items.map((item) => (
+          <a href={item.href} class="insight-row reveal">
+            <div class="ir-tag">{item.tag}</div>
+            <div class="ir-main">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+            <div class="ir-meta">
+              {item.meta.map((m) => <span>{m}</span>)}
+            </div>
+            <div class="ir-arrow" aria-hidden="true">&rarr;</div>
+          </a>
+        ))}
+
+        {(hasMore || !showAll) && (
+          <div class="insights-more reveal">
+            <a href="/news.html" class="btn btn-ghost">View All News &rarr;</a>
           </div>
-          <div class="ir-meta">
-            <span>7 use cases</span>
-            <span>5-step framework</span>
-            <span>12-month roadmap</span>
-          </div>
-          <div class="ir-arrow" aria-hidden="true">&rarr;</div>
-        </a>
+        )}
       </div>
     </div>
   </div>
@@ -69,6 +81,7 @@
     padding: 34px; background: var(--white); border: 1px solid var(--line);
     transition: border-color 0.2s var(--ease);
   }
+  .insight-row + .insight-row { margin-top: 16px; }
   .insight-row:hover { border-color: var(--navy); }
   .ir-tag {
     font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
@@ -78,6 +91,8 @@
   .ir-main p { color: var(--ink-soft); font-size: 14px; }
   .ir-meta { display: grid; gap: 8px; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-soft); }
   .ir-arrow { font-size: 22px; color: var(--navy); justify-self: end; }
+
+  .insights-more { display: flex; justify-content: center; margin-top: 32px; }
 
   @media (max-width: 980px) {
     .insight-row { grid-template-columns: 1fr; gap: 16px; }

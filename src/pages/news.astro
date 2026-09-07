@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import News from '../components/News.astro';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'News & Insights | THE DISTINCT 5 Ltd',
+  url: 'https://thedistinct5ltd.com/news.html',
+  description: 'News, guides and practical advisory insights from THE DISTINCT 5 Ltd.',
+});
+---
+
+<BaseLayout
+  title="News & Insights | THE DISTINCT 5 Ltd"
+  description="News, guides and practical advisory insights from THE DISTINCT 5 Ltd."
+  path="/news.html"
+  jsonLd={jsonLd}
+  activeNav="news"
+>
+  <div>
+    <News showAll />
+  </div>
+</BaseLayout>
