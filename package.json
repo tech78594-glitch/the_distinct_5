@@ -1,0 +1,24 @@
+{
+  "name": "thedistinct5-website",
+  "version": "1.0.0",
+  "description": "THE DISTINCT 5 Ltd — business consultancy & advisory website (Astro + TypeScript)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 3000",
+    "start": "astro dev --host 0.0.0.0 --port 3000",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.5",
+    "astro": "^7.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@vite-pwa/astro": "^1.2.0",
+    "typescript": "^5.7.3",
+    "workbox-window": "^7.4.1"
+  }
+}
