@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://thedistinct5ltd.com/sitemap.xml
