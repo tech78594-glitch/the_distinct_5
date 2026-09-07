@@ -31,12 +31,20 @@ export function initContactProtect(): void {
       const width = Math.ceil(ctx.measureText(emailText).width) + 4;
       canvas.width = width; // resizing resets ctx state
       ctx.font = font;
-      ctx.fillStyle = '#0d1426'; // --ink
+      // Read the live --ink token instead of a hardcoded colour, so the
+      // painted text follows light/dark theme just like the rest of the
+      // card (--ink flips to a light colour in dark mode — see
+      // html.dark in global.css). Canvas pixels don't respond to CSS
+      // themselves, so this has to be re-read and redrawn on toggle.
+      const inkColor = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#0d1426';
+      ctx.fillStyle = inkColor;
       ctx.textBaseline = 'middle';
       ctx.fillText(emailText, 0, canvas.height / 2);
       canvas.setAttribute('aria-label', emailText); // screen-reader accessible
     };
     void (document.fonts?.ready ?? Promise.resolve()).then(draw);
+    // Redraw whenever the theme toggle flips dark mode on/off.
+    document.addEventListener('themechange', draw);
   }
 
   // Layer 3 — phone assembled by CSS content:attr()

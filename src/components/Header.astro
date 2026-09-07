@@ -75,7 +75,7 @@ const links = [
     document.documentElement.classList.toggle('dark');
     const isDark = document.documentElement.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    
+
     if (isDark) {
       if (lightIcon) lightIcon.style.display = 'none';
       if (darkIcon) darkIcon.style.display = 'inline';
@@ -83,5 +83,9 @@ const links = [
       if (lightIcon) lightIcon.style.display = 'inline';
       if (darkIcon) darkIcon.style.display = 'none';
     }
+
+    // Let anything that paints outside normal CSS (e.g. the canvas-drawn
+    // contact email in Contact.astro) know it should redraw for the new theme.
+    document.dispatchEvent(new Event('themechange'));
   });
 </script>
