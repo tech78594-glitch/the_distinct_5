@@ -1,0 +1,441 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+interface StatCard {
+  value: string;
+  count?: number;
+  suffix?: string;
+  title: string;
+  body: string;
+}
+
+const stats: StatCard[] = [
+  { value: '5–20%', title: 'HALEU Enrichment Range', body: 'The U-235 concentration band that separates high-assay fuel from the low-enriched uranium powering today’s reactors.' },
+  { value: '0', count: 50, suffix: '%+', title: 'Of New SMR Designs Need HALEU', body: 'More than half of small modular reactor designs in development depend on fuel not yet produced at scale outside Russia and China.' },
+  { value: '0', count: 50, suffix: 'bn+', title: 'Waste-to-Energy Market by 2032', body: 'Projected global sector revenue as ageing landfill capacity and rising power demand push waste toward the grid.' },
+  { value: 'Ongoing', title: 'Fusion: Still Pre-Commercial', body: '2026 progress is real but incremental engineering and supply-chain work, not yet grid-scale power.' },
+];
+
+interface EnergySource {
+  num: string;
+  title: string;
+  body: string;
+  tag: string;
+}
+
+const sources: EnergySource[] = [
+  {
+    num: '01',
+    title: 'Nuclear Fission',
+    body: 'Today’s workhorse: splitting heavy atoms (mostly Uranium-235) to release heat that drives a turbine. It already supplies a meaningful share of the world’s low-carbon electricity and runs at very high uptime.',
+    tag: 'Established',
+  },
+  {
+    num: '02',
+    title: 'SMRs, LEU & HALEU',
+    body: 'Small modular reactors promise faster builds and lower upfront cost. Most rely on HALEU (5–20% U-235) rather than the LEU (under 5%) used in conventional plants a supply chain still being built out in the West.',
+    tag: 'Scaling Up',
+  },
+  {
+    num: '03',
+    title: 'Nuclear Fusion',
+    body: 'Fusing light atoms (deuterium and tritium, isotopes of Hydrogen) releases far more energy per gram than fission with none of the long-lived waste. Multiple approaches magnetic confinement, laser, field-reversed configuration are advancing, but commercial power remains years out.',
+    tag: 'Emerging',
+  },
+  {
+    num: '04',
+    title: 'Waste-to-Energy',
+    body: 'Converting municipal or industrial waste into electricity and heat through incineration, gasification, or anaerobic digestion. It solves two problems at once landfill pressure and baseload power and is scaling fastest where both are acute.',
+    tag: 'Circular Economy',
+  },
+  {
+    num: '05',
+    title: 'Green & Blue Hydrogen',
+    body: 'Hydrogen, the lightest element on the periodic table, can store and move energy generated elsewhere. "Green" hydrogen is split from water using renewable electricity; "blue" is produced from natural gas with the carbon captured.',
+    tag: 'Storage & Fuel',
+  },
+  {
+    num: '06',
+    title: 'Enhanced Geothermal',
+    body: 'New drilling techniques borrowed from oil and gas let developers reach useful heat almost anywhere, not just at tectonic hotspots turning geothermal from a niche resource into a potential always-on power source.',
+    tag: 'Emerging',
+  },
+];
+
+interface Element {
+  symbol: string;
+  number: string;
+  name: string;
+  role: string;
+}
+
+const elements: Element[] = [
+  { symbol: 'U', number: '92', name: 'Uranium', role: 'The primary fuel for fission today, enriched to different grades (LEU, HALEU) depending on the reactor.' },
+  { symbol: 'Th', number: '90', name: 'Thorium', role: 'A more abundant potential fission fuel with a different waste profile; molten-salt thorium reactors remain an active R&D track.' },
+  { symbol: 'H', number: '1', name: 'Hydrogen', role: 'Fuel for fusion (as deuterium and tritium) and a storage medium for renewable electricity via green hydrogen.' },
+  { symbol: 'Li', number: '3', name: 'Lithium', role: 'Not a fuel itself, but the battery chemistry that lets intermittent sources like solar, wind, and even excess reactor output be stored and dispatched.' },
+];
+
+const misconceptions = [
+  { title: '"Nuclear" Means One Thing', body: 'Fission and fusion share a name but almost nothing else in timeline, technology, or investment profile. Treating them as interchangeable leads to poor planning.' },
+  { title: 'Fusion Is Just Around the Corner', body: 'Independent 2026 assessments describe fusion progress as incremental and engineering-heavy real momentum, but not a near-term grid solution.' },
+  { title: 'Waste-to-Energy Is "Free" Power', body: 'Feedstock logistics, emissions controls, and permitting all carry real cost and lead time. It’s a strong option, not a shortcut.' },
+  { title: 'HALEU Is Already Available', body: 'Commercial-scale HALEU production currently sits mostly with Russia and China. Western supply is being built, but isn’t yet at scale.' },
+  { title: 'One Technology Will Win', body: 'The businesses planning best aren’t betting on a single source they’re building strategies that flex as each technology matures on its own timeline.' },
+];
+
+const horizons = [
+  { label: 'Now – 2030', title: 'Assess & Secure', items: ['Audit current energy exposure & cost risk', 'Evaluate on-site waste-to-energy where applicable', 'Track SMR & HALEU supply-chain announcements', 'Model long-term power purchase agreements'] },
+  { label: '2030 – 2035', title: 'Pilot & Diversify', items: ['Engage early SMR & advanced-fission projects', 'Pilot green hydrogen for storage or heavy transport', 'Diversify sourcing for lithium, uranium & rare elements', 'Build fusion & geothermal into scenario planning'] },
+  { label: '2035+', title: 'Scale & Optimise', items: ['Blend multiple non-carbon sources by use case', 'Formalise supply-chain resilience for critical elements', 'Reassess as fusion & EGS technologies mature', 'Embed energy strategy into core business planning'] },
+];
+
+const faqEntries = [
+  {
+    id: 'faq1',
+    question: 'Is nuclear fission the same as nuclear fusion?',
+    answer:
+      'No. Fission splits heavy atoms like Uranium and is the technology behind every operating nuclear plant today. Fusion joins light atoms (isotopes of Hydrogen) and is still in development. They differ enormously in maturity, cost, and timeline treat them as two separate strategies, not one.',
+  },
+  {
+    id: 'faq2',
+    question: 'What’s the difference between LEU and HALEU, and why does it matter for my business?',
+    answer:
+      'LEU is enriched to under 5% U-235 and fuels today’s conventional reactors. HALEU is enriched to 5–20% and is required by most next-generation small modular reactor designs. If your business is evaluating SMR partnerships or power agreements, HALEU supply-chain maturity is a key risk factor to watch.',
+  },
+  {
+    id: 'faq3',
+    question: 'Can waste-to-energy work for a single facility, or only at utility scale?',
+    answer:
+      'Both. Utility-scale waste-to-energy plants serve municipal grids, but smaller anaerobic digestion or gasification systems can be sized for a single industrial site with high organic or process waste turning a disposal cost into a power source.',
+  },
+  {
+    id: 'faq4',
+    question: 'Should we be securing supply chains for critical elements like lithium and uranium now?',
+    answer:
+      'For energy-intensive or energy-adjacent businesses, yes it’s worth starting the conversation. Enrichment capacity, battery-grade lithium, and rare-earth supply are all tightening as demand from fission, storage, and renewables grows in parallel. Early diversification reduces exposure later.',
+  },
+];
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Beyond Oil & Gas: Nuclear, Waste-to-Energy and the Next Energy Frontier',
+  description:
+    'A business leader’s guide to non-carbon energy sources nuclear fission, fusion, LEU and HALEU, waste-to-energy, hydrogen, geothermal, and the elements behind them.',
+  mainEntityOfPage: 'https://thedistinct5ltd.com/energy-beyond-carbon.html',
+  author: { '@type': 'Organization', name: 'THE DISTINCT 5 Ltd', url: 'https://thedistinct5ltd.com/' },
+  publisher: { '@type': 'Organization', name: 'THE DISTINCT 5 Ltd', url: 'https://thedistinct5ltd.com/' },
+  datePublished: '2026-09-09',
+  dateModified: '2026-09-09',
+  inLanguage: 'en-GB',
+});
+---
+
+<BaseLayout
+  title="Beyond Oil & Gas: The Next Energy Frontier | THE DISTINCT 5 Ltd"
+  description="A business leader's guide to non-carbon energy sources nuclear fission, fusion, LEU and HALEU, waste-to-energy, hydrogen, geothermal, and the elements behind them."
+  path="/energy-beyond-carbon.html"
+  jsonLd={jsonLd}
+  ogType="article"
+  activeNav="energy"
+  footerVariant="insight"
+>
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Advisory Insight</span>
+        <h1>Beyond Oil &amp; Gas: The Next Energy Frontier</h1>
+        <p>A business leader’s guide to the non-carbon energy sources reshaping supply chains, procurement, and long-term strategy from nuclear fission and fusion to waste-to-energy and beyond.</p>
+        <div class="hero-cta">
+          <a href="#intro" class="btn btn-primary">Explore the Guide &darr;</a>
+          <a href="/index.html#contact" class="btn btn-ghost">Talk to an Advisor</a>
+        </div>
+      </div>
+      <dl class="hero-facts">
+        <div>
+          <dt>Read time</dt>
+          <dd>10 minutes</dd>
+        </div>
+        <div>
+          <dt>Covers</dt>
+          <dd>Fission &amp; fusion &middot; LEU/HALEU &middot; waste-to-energy &middot; key elements &middot; business roadmap</dd>
+        </div>
+        <div>
+          <dt>Written for</dt>
+          <dd>Leaders assessing energy risk, cost, and supply-chain exposure</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="intro" id="intro" aria-label="Introduction">
+    <div class="narrow reveal">
+      <p><span class="lead-mark">Energy strategy has become a board-level question.</span> Whatever your sector, the cost, reliability, and carbon intensity of the power behind your operations now shapes procurement decisions, investor conversations, and long-term risk planning and oil and gas are no longer the only default.</p>
+      <p>This isn’t a call to bet everything on one technology. It’s a map of the non-carbon sources maturing at very different speeds, and what that means for how you plan.</p>
+    </div>
+  </section>
+
+  <section class="why-ai" id="why-it-matters" aria-label="Why this matters">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why It Matters</span>
+        <h2>The numbers behind the <span class="grad-text">shift</span></h2>
+        <p>A handful of figures that explain why this is moving from a sustainability topic to a supply-chain one.</p>
+      </div>
+      <div class="grid-4 stagger">
+        {stats.map((s) => (
+          <div class="stat-card reveal">
+            {s.count !== undefined ? (
+              <div class="num" data-count={s.count} data-suffix={s.suffix}>0</div>
+            ) : (
+              <div class="num">{s.value}</div>
+            )}
+            <h4>{s.title}</h4>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="usecases" id="sources" aria-label="Non-carbon energy sources">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The Sources</span>
+        <h2>Six non-carbon paths, <span class="grad-text">six different timelines</span></h2>
+        <p>From technology already on the grid to approaches still in the lab.</p>
+      </div>
+      <div class="grid-3 stagger">
+        {sources.map((s) => (
+          <article class="tilt uc reveal">
+            <div class="uc-num">{s.num}</div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            <span class="tag">{s.tag}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="elements" id="elements" aria-label="Elements behind the technology">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The Periodic Table</span>
+        <h2>The elements doing the <span class="grad-text">heavy lifting</span></h2>
+        <p>Every one of these technologies traces back to a handful of elements worth knowing by name.</p>
+      </div>
+      <div class="element-grid stagger">
+        {elements.map((el) => (
+          <div class="element-card reveal">
+            <div class="element-symbol">{el.symbol}<span class="element-number">{el.number}</span></div>
+            <h4>{el.name}</h4>
+            <p>{el.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pitfalls" aria-label="Common misconceptions">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Watch Out</span>
+        <h2>Common misconceptions to <span class="grad-text">avoid</span></h2>
+        <p>The assumptions we see trip up otherwise sound energy planning.</p>
+      </div>
+      <div class="narrow stagger">
+        {misconceptions.map((p) => (
+          <div class="pitfall reveal">
+            <div class="pitfall-ico" aria-hidden="true">!</div>
+            <div><h4>{p.title}</h4><p>{p.body}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bigquote" aria-label="Key insight">
+    <div class="reveal">
+      <div class="qm" aria-hidden="true">&ldquo;</div>
+      <blockquote>The businesses that get ahead aren’t betting on a single fuel they’re building energy strategies that can flex as fission, fusion, and waste-to-energy each mature on their own timeline.</blockquote>
+    </div>
+  </section>
+
+  <section class="roadmap" id="roadmap" aria-label="Business roadmap">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The Roadmap</span>
+        <h2>What this means for <span class="grad-text">your business</span></h2>
+        <p>A realistic horizon for planning around non-carbon energy, whatever your sector.</p>
+      </div>
+      <div class="roadmap-grid stagger">
+        {horizons.map((h) => (
+          <div class="horizon reveal">
+            <div class="horizon-label">{h.label}</div>
+            <h4>{h.title}</h4>
+            <ul>{h.items.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-label="Frequently asked questions">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Questions? Answers.</span>
+        <h2>Non-carbon energy <span class="grad-text">questions</span></h2>
+        <p>What business leaders ask us most when this topic reaches their desk.</p>
+      </div>
+      <div class="faq-list reveal">
+        {faqEntries.map((entry) => (
+          <div class="faq-item">
+            <button class="faq-q" id={`${entry.id}q`} aria-expanded="false" aria-controls={`${entry.id}a`}>
+              {entry.question}
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id={`${entry.id}a`} role="region" aria-labelledby={`${entry.id}q`}>
+              <div class="faq-a-inner" set:html={entry.answer} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Plan your energy strategy with confidence"
+    body="THE DISTINCT 5 helps businesses assess energy risk and opportunity across nuclear, waste-to-energy, and emerging sources. Book a complimentary strategy session."
+    ctaLabel="Book Strategy Session"
+    ctaHref="/index.html#contact"
+  />
+
+</BaseLayout>
+
+
+<style>
+  /* ============ HERO ============ */
+  .hero { padding-top: 82px; border-top: none; }
+  .hero-grid {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    border: 1px solid var(--line);
+  }
+  .hero-copy { padding: 56px 48px; border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; }
+  .hero-copy .eyebrow { margin-bottom: 22px; }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(30px, 4vw, 48px); line-height: 1.12;
+    letter-spacing: -0.6px; margin-bottom: 20px; color: var(--navy);
+  }
+  .hero p { font-size: 16px; color: var(--ink-soft); max-width: 480px; margin-bottom: 28px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-facts { padding: 40px 44px; background: var(--paper); display: grid; gap: 24px; align-content: center; }
+  .hero-facts dt {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 6px;
+  }
+  .hero-facts dd { font-family: var(--font-head); font-size: 14px; color: var(--navy); font-weight: 500; }
+
+  /* ============ INTRO ============ */
+  .intro { background: var(--paper); }
+  .intro p { font-size: 17px; color: var(--ink-soft); }
+  .intro p + p { margin-top: 18px; }
+  .intro .lead-mark { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 18px; }
+
+  /* ============ WHY IT MATTERS STATS ============ */
+  .why-ai { background: var(--white); }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
+  .stat-card { padding: 30px 26px; border-right: 1px solid var(--line); }
+  .stat-card:last-child { border-right: none; }
+  .stat-card .num {
+    font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1;
+    color: var(--navy);
+  }
+  .stat-card h4 { font-family: var(--font-head); font-weight: 700; font-size: 15px; margin: 14px 0 6px; color: var(--navy); }
+  .stat-card p { font-size: 13px; color: var(--ink-soft); }
+
+  /* ============ SOURCES ============ */
+  .usecases { background: var(--paper); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: var(--white); }
+  .uc { padding: 30px 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .uc-num { font-family: var(--font-mono); font-size: 20px; color: var(--line-strong); margin-bottom: 12px; }
+  .uc h3 { font-family: var(--font-head); font-weight: 700; font-size: 17px; margin-bottom: 9px; color: var(--navy); }
+  .uc p { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 16px; }
+  .tag {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--steel);
+  }
+
+  /* ============ ELEMENTS ============ */
+  .elements { background: var(--white); }
+  .element-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
+  .element-card { padding: 28px 24px; border-right: 1px solid var(--line); }
+  .element-card:last-child { border-right: none; }
+  .element-symbol {
+    font-family: var(--font-display); font-weight: 800; font-size: 30px; color: var(--navy);
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px;
+  }
+  .element-number { font-family: var(--font-mono); font-size: 12px; color: var(--steel); font-weight: 400; }
+  .element-card h4 { font-family: var(--font-head); font-weight: 700; font-size: 15px; margin-bottom: 8px; color: var(--navy); }
+  .element-card p { font-size: 13px; color: var(--ink-soft); }
+
+  /* ============ MISCONCEPTIONS ============ */
+  .pitfalls { background: var(--paper); }
+  .pitfall {
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+    padding: 22px 4px; border-bottom: 1px solid var(--line);
+  }
+  .pitfall-ico {
+    font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--steel);
+  }
+  .pitfall h4 { font-family: var(--font-head); font-weight: 700; font-size: 15.5px; margin-bottom: 5px; color: var(--navy); }
+  .pitfall p { color: var(--ink-soft); font-size: 13.5px; }
+
+  /* ============ BIG QUOTE ============ */
+  .bigquote { background: var(--navy); color: #fff; text-align: left; }
+  .bigquote .qm { font-family: var(--font-display); font-weight: 800; font-size: 60px; line-height: 0.6; color: var(--steel-soft); opacity: 0.5; }
+  .bigquote blockquote {
+    max-width: 780px; margin-top: 16px;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(20px, 2.8vw, 30px); line-height: 1.4; letter-spacing: -0.3px;
+  }
+
+  /* ============ ROADMAP ============ */
+  .roadmap { background: var(--white); }
+  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+  .horizon { padding: 32px 28px; border-right: 1px solid var(--line); }
+  .horizon:last-child { border-right: none; }
+  .horizon-label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 8px;
+  }
+  .horizon h4 { font-family: var(--font-display); font-weight: 800; font-size: 18px; margin-bottom: 16px; color: var(--navy); }
+  .horizon ul { list-style: none; }
+  .horizon li {
+    font-size: 13.5px; color: var(--ink-soft); padding: 8px 0; position: relative; padding-left: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .horizon li:last-child { border-bottom: none; }
+  .horizon li::before { content: ''; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; background: var(--steel); }
+
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-copy { border-right: none; border-bottom: 1px solid var(--line); }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .element-grid { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .roadmap .horizon { border-right: none; border-bottom: 1px solid var(--line); }
+    .roadmap .horizon:last-child { border-bottom: none; }
+  }
+  @media (max-width: 680px) {
+    .hero { padding-top: 0; }
+    .hero-copy { padding: 40px 24px; }
+    .grid-4, .grid-3, .element-grid { grid-template-columns: 1fr; }
+    .stat-card, .uc, .element-card { border-right: none; }
+  }
+</style>

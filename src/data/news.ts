@@ -23,6 +23,16 @@ export const HOME_NEWS_LIMIT = 3;
 
 export const newsItems: NewsItem[] = [
   {
+    tag: 'Energy Insight',
+    title: 'Beyond Oil & Gas: The Next Energy Frontier',
+    description:
+      'A business leader’s guide to non-carbon energy sources nuclear fission, fusion, LEU and ' +
+      'HALEU, waste-to-energy, hydrogen, and geothermal plus the periodic table elements behind ' +
+      'them and what it means for your energy strategy.',
+    meta: ['6 energy sources', 'Key elements explained', 'Business roadmap'],
+    href: '/energy-beyond-carbon.html',
+  },
+  {
     tag: 'Featured Guide',
     title: 'How to Use AI in B2B',
     description:
