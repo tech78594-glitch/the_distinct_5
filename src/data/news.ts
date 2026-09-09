@@ -15,6 +15,8 @@ export interface NewsItem {
   description: string;
   meta: string[];
   href: string;
+  /** Optional background image for the row (shown blurred behind everything except the tag). */
+  image?: string;
 }
 
 export const HOME_NEWS_LIMIT = 3;
@@ -29,5 +31,6 @@ export const newsItems: NewsItem[] = [
       'and a realistic 12-month roadmap.',
     meta: ['7 use cases', '5-step framework', '12-month roadmap'],
     href: '/ai-in-b2b.html',
+    image: '/images/AI_in_B2B_storyboard_layout_202609090926.jpeg',
   },
 ];

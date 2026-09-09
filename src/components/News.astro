@@ -37,7 +37,12 @@ const hasMore = !showAll && newsItems.length > HOME_NEWS_LIMIT;
 
       <div class="real-state" style="display: none; width: 100%;">
         {items.map((item) => (
-          <a href={item.href} class="insight-row reveal">
+          <a
+            href={item.href}
+            class={item.image ? 'insight-row reveal has-bg' : 'insight-row reveal'}
+            style={item.image ? `--row-bg: url('${item.image}')` : undefined}
+          >
+            {item.image && <div class="ir-bg" aria-hidden="true"></div>}
             <div class="ir-tag">{item.tag}</div>
             <div class="ir-main">
               <h3>{item.title}</h3>
@@ -77,15 +82,39 @@ const hasMore = !showAll && newsItems.length > HOME_NEWS_LIMIT;
 <style>
   .insights { background: var(--paper); }
   .insight-row {
+    position: relative;
     display: grid; grid-template-columns: 140px 1.6fr 1fr 40px; gap: 30px; align-items: center;
     padding: 34px; background: var(--white); border: 1px solid var(--line);
     transition: border-color 0.2s var(--ease);
   }
   .insight-row + .insight-row { margin-top: 16px; }
   .insight-row:hover { border-color: var(--navy); }
+
+  /* Rows with a background image (see NewsItem.image): a slightly blurred
+     cover image sits behind everything, with a theme-aware overlay for
+     legibility. The tag chip gets its own solid background so the image
+     never shows through behind it. */
+  .insight-row.has-bg { overflow: hidden; }
+  .ir-bg {
+    position: absolute; inset: 0;
+    background-image: var(--row-bg);
+    background-size: cover; background-position: center;
+    filter: blur(6px); transform: scale(1.06);
+    z-index: 0; pointer-events: none;
+  }
+  .insight-row.has-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--white); opacity: 0.8;
+    z-index: 0; pointer-events: none;
+  }
+  .insight-row.has-bg > *:not(.ir-bg) { position: relative; z-index: 1; }
+
   .ir-tag {
     font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
     color: var(--steel);
+  }
+  .has-bg .ir-tag {
+    background: var(--white); display: inline-block; padding: 6px 10px; border: 1px solid var(--line);
   }
   .ir-main h3 { font-family: var(--font-head); font-weight: 700; font-size: 19px; margin-bottom: 8px; color: var(--navy); }
   .ir-main p { color: var(--ink-soft); font-size: 14px; }
