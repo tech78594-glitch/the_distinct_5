@@ -37,6 +37,32 @@ const canonicalUrl = new URL(path, Astro.site).toString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Language" content="en" />
+    <!--
+      GitHub Pages serves this site with no server config, so it can't send
+      custom HTTP response headers (no CSP/HSTS/X-Frame-Options/etc. at the
+      header level - a <meta> tag is the only lever available here, and
+      browsers only honour a subset of security directives when set this
+      way: frame-ancestors, and header-only ones like X-Frame-Options,
+      X-Content-Type-Options and Strict-Transport-Security, are silently
+      ignored via <meta> by design, so they are intentionally left out
+      rather than shipped as a no-op that looks protective but isn't.
+      If those are ever needed, put a CDN (e.g. Cloudflare) in front of
+      the custom domain so it can set real response headers.
+
+      What IS enforced from a <meta> tag: this CSP still gives real
+      defense-in-depth even with 'unsafe-inline' (required because the
+      site's inline theme-toggle script and inline style="" attributes
+      aren't nonce'd) - it stops any injected script from pulling in a
+      script/font/stylesheet/image from a third-party origin or exfiltrating
+      data via fetch/XHR to one, and blocks <object>/<embed> and base-tag
+      hijacking outright. Update font-src/style-src together if the Google
+      Fonts host below ever changes.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta property="og:locale" content="en_US" />
     <title>{title}</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
