@@ -31,6 +31,7 @@ export const newsItems: NewsItem[] = [
       'them and what it means for your energy strategy.',
     meta: ['6 energy sources', 'Key elements explained', 'Business roadmap'],
     href: '/energy-beyond-carbon.html',
+    image: '/images/energy-beyond-carbon-hero.jpeg',
   },
   {
     tag: 'Featured Guide',
