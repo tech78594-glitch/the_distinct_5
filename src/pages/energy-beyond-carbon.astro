@@ -426,8 +426,11 @@ const jsonLd = JSON.stringify({
   .pitfall p { color: var(--ink-soft); font-size: 13.5px; }
 
   /* ============ BIG QUOTE ============ */
-  .bigquote { background: var(--navy); color: #fff; text-align: left; }
-  .bigquote .qm { font-family: var(--font-display); font-weight: 800; font-size: 60px; line-height: 0.6; color: var(--steel-soft); opacity: 0.5; }
+  /* Fixed dark band regardless of theme (like the footer/CTA band) —
+     --navy flips to a light colour in dark mode, which would leave this
+     white text unreadable against it if left theme-aware. */
+  .bigquote { background: #0a1d38; color: #fff; text-align: left; }
+  .bigquote .qm { font-family: var(--font-display); font-weight: 800; font-size: 60px; line-height: 0.6; color: #eaf0f7; opacity: 0.5; }
   .bigquote blockquote {
     max-width: 780px; margin-top: 16px;
     font-family: var(--font-display); font-weight: 700;
