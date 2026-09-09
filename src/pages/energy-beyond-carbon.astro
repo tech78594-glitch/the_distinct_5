@@ -68,21 +68,22 @@ interface Element {
   number: string;
   name: string;
   role: string;
+  accent: string;
 }
 
 const elements: Element[] = [
-  { symbol: 'U', number: '92', name: 'Uranium', role: 'The primary fuel for fission today, enriched to different grades (LEU, HALEU) depending on the reactor.' },
-  { symbol: 'Th', number: '90', name: 'Thorium', role: 'A more abundant potential fission fuel with a different waste profile; molten-salt thorium reactors remain an active R&D track.' },
-  { symbol: 'H', number: '1', name: 'Hydrogen', role: 'Fuel for fusion (as deuterium and tritium) and a storage medium for renewable electricity via green hydrogen.' },
-  { symbol: 'Li', number: '3', name: 'Lithium', role: 'Not a fuel itself, but the battery chemistry that lets intermittent sources like solar, wind, and even excess reactor output be stored and dispatched.' },
+  { symbol: 'U', number: '92', name: 'Uranium', role: 'The primary fuel for fission today, enriched to different grades (LEU, HALEU) depending on the reactor.', accent: '#1d4e89' },
+  { symbol: 'Th', number: '90', name: 'Thorium', role: 'A more abundant potential fission fuel with a different waste profile; molten-salt thorium reactors remain an active R&D track.', accent: '#123561' },
+  { symbol: 'H', number: '1', name: 'Hydrogen', role: 'Fuel for fusion (as deuterium and tritium) and a storage medium for renewable electricity via green hydrogen.', accent: '#2f7d5e' },
+  { symbol: 'Li', number: '3', name: 'Lithium', role: 'Not a fuel itself, but the battery chemistry that lets intermittent sources like solar, wind, and even excess reactor output be stored and dispatched.', accent: '#7a6a1d' },
 ];
 
 const misconceptions = [
-  { title: '"Nuclear" Means One Thing', body: 'Fission and fusion share a name but almost nothing else in timeline, technology, or investment profile. Treating them as interchangeable leads to poor planning.' },
-  { title: 'Fusion Is Just Around the Corner', body: 'Independent 2026 assessments describe fusion progress as incremental and engineering-heavy real momentum, but not a near-term grid solution.' },
-  { title: 'Waste-to-Energy Is "Free" Power', body: 'Feedstock logistics, emissions controls, and permitting all carry real cost and lead time. It’s a strong option, not a shortcut.' },
-  { title: 'HALEU Is Already Available', body: 'Commercial-scale HALEU production currently sits mostly with Russia and China. Western supply is being built, but isn’t yet at scale.' },
-  { title: 'One Technology Will Win', body: 'The businesses planning best aren’t betting on a single source they’re building strategies that flex as each technology matures on its own timeline.' },
+  { myth: '"Nuclear" Means One Thing', reality: 'Fission and fusion share a name but almost nothing else in timeline, technology, or investment profile. Treating them as interchangeable leads to poor planning.' },
+  { myth: 'Fusion Is Just Around the Corner', reality: 'Independent 2026 assessments describe fusion progress as incremental and engineering-heavy real momentum, but not a near-term grid solution.' },
+  { myth: 'Waste-to-Energy Is "Free" Power', reality: 'Feedstock logistics, emissions controls, and permitting all carry real cost and lead time. It’s a strong option, not a shortcut.' },
+  { myth: 'HALEU Is Already Available', reality: 'Commercial-scale HALEU production currently sits mostly with Russia and China. Western supply is being built, but isn’t yet at scale.' },
+  { myth: 'One Technology Will Win', reality: 'The businesses planning best aren’t betting on a single source they’re building strategies that flex as each technology matures on its own timeline.' },
 ];
 
 const horizons = [
@@ -141,6 +142,13 @@ const jsonLd = JSON.stringify({
   ogType="article"
   activeNav="energy"
   footerVariant="insight"
+  guideLinks={[
+    { href: '#why-it-matters', label: 'Why It Matters' },
+    { href: '#sources', label: 'The Sources' },
+    { href: '#elements', label: 'Key Elements' },
+    { href: '#roadmap', label: 'Roadmap' },
+    { href: '#faq', label: 'FAQ' },
+  ]}
 >
   <section class="hero" aria-label="Introduction">
     <img
@@ -151,30 +159,28 @@ const jsonLd = JSON.stringify({
       loading="eager"
       decoding="async"
     />
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow">Advisory Insight</span>
-        <h1>Beyond Oil &amp; Gas: The Next Energy Frontier</h1>
-        <p>A business leader’s guide to the non-carbon energy sources reshaping supply chains, procurement, and long-term strategy from nuclear fission and fusion to waste-to-energy and beyond.</p>
-        <div class="hero-cta">
-          <a href="#intro" class="btn btn-primary">Explore the Guide &darr;</a>
-          <a href="/index.html#contact" class="btn btn-ghost">Talk to an Advisor</a>
+    <div class="hero-inner">
+      <span class="eyebrow">Advisory Insight</span>
+      <h1>Beyond Oil &amp; Gas: The Next Energy Frontier</h1>
+      <p class="lede">A business leader’s guide to the non-carbon energy sources reshaping supply chains, procurement, and long-term strategy from nuclear fission and fusion to waste-to-energy and beyond.</p>
+      <div class="hero-cta">
+        <a href="#intro" class="btn btn-primary">Explore the Guide &darr;</a>
+        <a href="/index.html#contact" class="btn btn-ghost">Talk to an Advisor</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs-item">
+          <span class="hs-label">Read time</span>
+          <span class="hs-value">10 minutes</span>
+        </div>
+        <div class="hs-item">
+          <span class="hs-label">Covers</span>
+          <span class="hs-value">Fission &amp; fusion &middot; LEU/HALEU &middot; waste-to-energy &middot; roadmap</span>
+        </div>
+        <div class="hs-item">
+          <span class="hs-label">Written for</span>
+          <span class="hs-value">Leaders assessing energy risk &amp; supply-chain exposure</span>
         </div>
       </div>
-      <dl class="hero-facts">
-        <div>
-          <dt>Read time</dt>
-          <dd>10 minutes</dd>
-        </div>
-        <div>
-          <dt>Covers</dt>
-          <dd>Fission &amp; fusion &middot; LEU/HALEU &middot; waste-to-energy &middot; key elements &middot; business roadmap</dd>
-        </div>
-        <div>
-          <dt>Written for</dt>
-          <dd>Leaders assessing energy risk, cost, and supply-chain exposure</dd>
-        </div>
-      </dl>
     </div>
   </section>
 
@@ -185,20 +191,20 @@ const jsonLd = JSON.stringify({
     </div>
   </section>
 
-  <section class="why-ai" id="why-it-matters" aria-label="Why this matters">
+  <section class="stat-strip" id="why-it-matters" aria-label="Why this matters">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Why It Matters</span>
         <h2>The numbers behind the <span class="grad-text">shift</span></h2>
         <p>A handful of figures that explain why this is moving from a sustainability topic to a supply-chain one.</p>
       </div>
-      <div class="grid-4 stagger">
+      <div class="strip-row stagger">
         {stats.map((s) => (
-          <div class="stat-card reveal">
+          <div class="strip-item reveal">
             {s.count !== undefined ? (
-              <div class="num" data-count={s.count} data-suffix={s.suffix}>0</div>
+              <div class="strip-num" data-count={s.count} data-suffix={s.suffix}>0</div>
             ) : (
-              <div class="num">{s.value}</div>
+              <div class="strip-num">{s.value}</div>
             )}
             <h4>{s.title}</h4>
             <p>{s.body}</p>
@@ -208,21 +214,23 @@ const jsonLd = JSON.stringify({
     </div>
   </section>
 
-  <section class="usecases" id="sources" aria-label="Non-carbon energy sources">
+  <section class="timeline-sources" id="sources" aria-label="Non-carbon energy sources">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">The Sources</span>
         <h2>Six non-carbon paths, <span class="grad-text">six different timelines</span></h2>
         <p>From technology already on the grid to approaches still in the lab.</p>
       </div>
-      <div class="grid-3 stagger">
-        {sources.map((s) => (
-          <article class="tilt uc reveal">
-            <div class="uc-num">{s.num}</div>
-            <h3>{s.title}</h3>
-            <p>{s.body}</p>
-            <span class="tag">{s.tag}</span>
-          </article>
+      <div class="timeline">
+        {sources.map((s, i) => (
+          <div class={i % 2 === 1 ? 'tl-row tl-alt reveal' : 'tl-row reveal'}>
+            <div class="tl-card">
+              <span class="tag">{s.tag}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+            <div class="tl-marker" aria-hidden="true">{s.num}</div>
+          </div>
         ))}
       </div>
     </div>
@@ -237,8 +245,9 @@ const jsonLd = JSON.stringify({
       </div>
       <div class="element-grid stagger">
         {elements.map((el) => (
-          <div class="element-card reveal">
-            <div class="element-symbol">{el.symbol}<span class="element-number">{el.number}</span></div>
+          <div class="element-tile reveal" style={`--tile-accent: ${el.accent}`}>
+            <span class="tile-number">{el.number}</span>
+            <span class="tile-symbol">{el.symbol}</span>
             <h4>{el.name}</h4>
             <p>{el.role}</p>
           </div>
@@ -247,18 +256,24 @@ const jsonLd = JSON.stringify({
     </div>
   </section>
 
-  <section class="pitfalls" aria-label="Common misconceptions">
+  <section class="myths" aria-label="Common misconceptions">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Watch Out</span>
         <h2>Common misconceptions to <span class="grad-text">avoid</span></h2>
         <p>The assumptions we see trip up otherwise sound energy planning.</p>
       </div>
-      <div class="narrow stagger">
-        {misconceptions.map((p) => (
-          <div class="pitfall reveal">
-            <div class="pitfall-ico" aria-hidden="true">!</div>
-            <div><h4>{p.title}</h4><p>{p.body}</p></div>
+      <div class="myth-list stagger">
+        {misconceptions.map((m) => (
+          <div class="myth-row reveal">
+            <div class="myth-col myth-col-myth">
+              <span class="myth-tag">Myth</span>
+              <h4>{m.myth}</h4>
+            </div>
+            <div class="myth-col myth-col-reality">
+              <span class="myth-tag myth-tag-reality">Reality</span>
+              <p>{m.reality}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -272,17 +287,18 @@ const jsonLd = JSON.stringify({
     </div>
   </section>
 
-  <section class="roadmap" id="roadmap" aria-label="Business roadmap">
+  <section class="roadmap-timeline" id="roadmap" aria-label="Business roadmap">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">The Roadmap</span>
         <h2>What this means for <span class="grad-text">your business</span></h2>
         <p>A realistic horizon for planning around non-carbon energy, whatever your sector.</p>
       </div>
-      <div class="roadmap-grid stagger">
-        {horizons.map((h) => (
-          <div class="horizon reveal">
-            <div class="horizon-label">{h.label}</div>
+      <div class="rt-track stagger">
+        {horizons.map((h, i) => (
+          <div class="rt-step reveal">
+            <div class="rt-dot">{i + 1}</div>
+            <div class="rt-label">{h.label}</div>
             <h4>{h.title}</h4>
             <ul>{h.items.map((item) => <li>{item}</li>)}</ul>
           </div>
@@ -325,8 +341,8 @@ const jsonLd = JSON.stringify({
 
 
 <style>
-  /* ============ HERO ============ */
-  .hero { position: relative; padding-top: 82px; padding-bottom: 48px; border-top: none; overflow: hidden; }
+  /* ============ HERO — single centered card, inline stat row ============ */
+  .hero { position: relative; padding: 96px 24px 64px; border-top: none; overflow: hidden; display: flex; justify-content: center; }
   .hero-bg {
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; object-position: center;
@@ -338,37 +354,40 @@ const jsonLd = JSON.stringify({
     background: var(--white); opacity: 0.72;
     z-index: 0; pointer-events: none;
   }
-  .hero-grid {
+  .hero-inner {
     position: relative; z-index: 1;
-    max-width: 1180px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    max-width: 860px; width: 100%;
+    background: var(--white);
     border: 1px solid var(--line);
     box-shadow: 0 12px 40px rgba(13, 20, 38, 0.12);
-    animation: hero-grid-drop-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    padding: 52px 56px 40px;
+    animation: hero-drop-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: 0.15s;
   }
-  @keyframes hero-grid-drop-in {
+  @keyframes hero-drop-in {
     from { opacity: 0; transform: translateY(-40px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-grid { animation: none; }
+    .hero-inner { animation: none; }
   }
-  .hero-copy { padding: 56px 48px; background: var(--white); border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; }
-  .hero-copy .eyebrow { margin-bottom: 22px; }
+  .hero-inner .eyebrow { margin-bottom: 20px; }
   .hero h1 {
     font-family: var(--font-display); font-weight: 800;
-    font-size: clamp(30px, 4vw, 48px); line-height: 1.12;
-    letter-spacing: -0.6px; margin-bottom: 20px; color: var(--navy);
+    font-size: clamp(28px, 3.8vw, 44px); line-height: 1.14;
+    letter-spacing: -0.6px; margin-bottom: 16px; color: var(--navy);
+    max-width: 700px;
   }
-  .hero p { font-size: 16px; color: var(--ink-soft); max-width: 480px; margin-bottom: 28px; }
-  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero-facts { padding: 40px 44px; background: var(--paper); display: grid; gap: 24px; align-content: center; }
-  .hero-facts dt {
-    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--steel); margin-bottom: 6px;
+  .hero .lede { font-size: 16px; color: var(--ink-soft); max-width: 640px; margin-bottom: 26px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+  .hs-item { padding-right: 30px; margin-right: 30px; border-right: 1px solid var(--line); max-width: 260px; }
+  .hs-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .hs-label {
+    display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--steel); margin-bottom: 6px;
   }
-  .hero-facts dd { font-family: var(--font-head); font-size: 14px; color: var(--navy); font-weight: 500; }
+  .hs-value { display: block; font-family: var(--font-head); font-size: 13.5px; color: var(--navy); font-weight: 500; }
 
   /* ============ INTRO ============ */
   .intro { background: var(--paper); }
@@ -376,99 +395,143 @@ const jsonLd = JSON.stringify({
   .intro p + p { margin-top: 18px; }
   .intro .lead-mark { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 18px; }
 
-  /* ============ WHY IT MATTERS STATS ============ */
-  .why-ai { background: var(--white); }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
-  .stat-card { padding: 30px 26px; border-right: 1px solid var(--line); }
-  .stat-card:last-child { border-right: none; }
-  .stat-card .num {
-    font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1;
-    color: var(--navy);
+  /* ============ WHY IT MATTERS — dark stat strip (fixed, theme-independent) ============ */
+  .stat-strip { background: #0a1d38; }
+  .stat-strip .section-head .eyebrow { color: #9fb8d9; background: none; }
+  .stat-strip .section-head .eyebrow::before { background: #9fb8d9; }
+  .stat-strip .section-head h2 { color: #fff; }
+  .stat-strip .section-head .grad-text { color: #7eb3f0; }
+  .stat-strip .section-head p { color: rgba(255, 255, 255, 0.68); }
+  .strip-row { display: flex; flex-wrap: wrap; }
+  .strip-item {
+    flex: 1 1 220px; padding: 0 28px 0 0; margin-right: 28px; margin-bottom: 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
   }
-  .stat-card h4 { font-family: var(--font-head); font-weight: 700; font-size: 15px; margin: 14px 0 6px; color: var(--navy); }
-  .stat-card p { font-size: 13px; color: var(--ink-soft); }
+  .strip-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .strip-num { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; color: #fff; }
+  .strip-item h4 { font-family: var(--font-head); font-weight: 700; font-size: 14.5px; margin: 12px 0 6px; color: #fff; }
+  .strip-item p { font-size: 12.5px; color: rgba(255, 255, 255, 0.65); }
 
-  /* ============ SOURCES ============ */
-  .usecases { background: var(--paper); }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: var(--white); }
-  .uc { padding: 30px 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .uc-num { font-family: var(--font-mono); font-size: 20px; color: var(--line-strong); margin-bottom: 12px; }
-  .uc h3 { font-family: var(--font-head); font-weight: 700; font-size: 17px; margin-bottom: 9px; color: var(--navy); }
-  .uc p { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 16px; }
+  /* ============ SOURCES — alternating vertical timeline ============ */
+  .timeline-sources { background: var(--white); }
+  .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+  .timeline::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+    background: var(--line); transform: translateX(-1px);
+  }
+  .tl-row {
+    position: relative; display: flex; justify-content: flex-end;
+    padding-right: calc(50% + 30px); margin-bottom: 28px;
+  }
+  .tl-alt { justify-content: flex-start; padding-right: 0; padding-left: calc(50% + 30px); }
+  .tl-card {
+    padding: 24px 26px; background: var(--paper); border: 1px solid var(--line);
+    max-width: 380px; width: 100%;
+  }
+  .tl-marker {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600; z-index: 1;
+  }
+  .tl-card h3 { font-family: var(--font-head); font-weight: 700; font-size: 17px; margin-bottom: 8px; color: var(--navy); }
+  .tl-card p { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 14px; }
   .tag {
     font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase;
     color: var(--steel);
   }
 
-  /* ============ ELEMENTS ============ */
-  .elements { background: var(--white); }
-  .element-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
-  .element-card { padding: 28px 24px; border-right: 1px solid var(--line); }
-  .element-card:last-child { border-right: none; }
-  .element-symbol {
-    font-family: var(--font-display); font-weight: 800; font-size: 30px; color: var(--navy);
-    display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px;
+  /* ============ ELEMENTS — periodic-table tiles ============ */
+  .elements { background: var(--paper); }
+  .element-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .element-tile {
+    position: relative; background: var(--white); border: 1px solid var(--line);
+    border-top: 3px solid var(--tile-accent); padding: 22px 20px 20px; aspect-ratio: 1 / 1;
+    display: flex; flex-direction: column;
   }
-  .element-number { font-family: var(--font-mono); font-size: 12px; color: var(--steel); font-weight: 400; }
-  .element-card h4 { font-family: var(--font-head); font-weight: 700; font-size: 15px; margin-bottom: 8px; color: var(--navy); }
-  .element-card p { font-size: 13px; color: var(--ink-soft); }
+  .tile-number {
+    position: absolute; top: 10px; left: 12px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--steel);
+  }
+  .tile-symbol {
+    font-family: var(--font-display); font-weight: 800; font-size: 34px; color: var(--navy);
+    margin-top: 14px; margin-bottom: 8px;
+  }
+  .element-tile h4 { font-family: var(--font-head); font-weight: 700; font-size: 14px; margin-bottom: 6px; color: var(--navy); }
+  .element-tile p { font-size: 11.5px; color: var(--ink-soft); line-height: 1.4; }
 
-  /* ============ MISCONCEPTIONS ============ */
-  .pitfalls { background: var(--paper); }
-  .pitfall {
-    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
-    padding: 22px 4px; border-bottom: 1px solid var(--line);
+  /* ============ MISCONCEPTIONS — myth / reality split rows ============ */
+  .myths { background: var(--white); }
+  .myth-list { max-width: 980px; margin: 0 auto; border-top: 1px solid var(--line); }
+  .myth-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    padding: 22px 0; border-bottom: 1px solid var(--line);
   }
-  .pitfall-ico {
-    font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--steel);
+  .myth-col { display: flex; flex-direction: column; gap: 8px; }
+  .myth-tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--ink-soft); width: fit-content;
   }
-  .pitfall h4 { font-family: var(--font-head); font-weight: 700; font-size: 15.5px; margin-bottom: 5px; color: var(--navy); }
-  .pitfall p { color: var(--ink-soft); font-size: 13.5px; }
+  .myth-tag-reality { color: var(--steel); }
+  .myth-col-myth h4 {
+    font-family: var(--font-head); font-weight: 600; font-size: 15px; color: var(--ink-soft);
+    text-decoration: line-through; text-decoration-color: var(--line-strong); text-decoration-thickness: 1px;
+  }
+  .myth-col-reality p { font-size: 13.5px; color: var(--ink); }
 
-  /* ============ BIG QUOTE ============ */
+  /* ============ BIG QUOTE — centered ============ */
   /* Fixed dark band regardless of theme (like the footer/CTA band) —
      --navy flips to a light colour in dark mode, which would leave this
      white text unreadable against it if left theme-aware. */
-  .bigquote { background: #0a1d38; color: #fff; text-align: left; }
+  .bigquote { background: #0a1d38; color: #fff; text-align: center; display: flex; justify-content: center; }
+  .bigquote > div { max-width: 780px; }
   .bigquote .qm { font-family: var(--font-display); font-weight: 800; font-size: 60px; line-height: 0.6; color: #eaf0f7; opacity: 0.5; }
   .bigquote blockquote {
-    max-width: 780px; margin-top: 16px;
+    margin: 16px auto 0;
     font-family: var(--font-display); font-weight: 700;
     font-size: clamp(20px, 2.8vw, 30px); line-height: 1.4; letter-spacing: -0.3px;
   }
 
-  /* ============ ROADMAP ============ */
-  .roadmap { background: var(--white); }
-  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
-  .horizon { padding: 32px 28px; border-right: 1px solid var(--line); }
-  .horizon:last-child { border-right: none; }
-  .horizon-label {
+  /* ============ ROADMAP — connected horizontal timeline ============ */
+  .roadmap-timeline { background: var(--paper); }
+  .rt-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+  .rt-track::before {
+    content: ''; position: absolute; top: 15px; left: 8%; right: 8%; height: 2px; background: var(--line);
+  }
+  .rt-step { position: relative; }
+  .rt-dot {
+    position: relative; z-index: 1; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700; margin-bottom: 18px;
+  }
+  .rt-label {
     font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
     color: var(--steel); margin-bottom: 8px;
   }
-  .horizon h4 { font-family: var(--font-display); font-weight: 800; font-size: 18px; margin-bottom: 16px; color: var(--navy); }
-  .horizon ul { list-style: none; }
-  .horizon li {
+  .rt-step h4 { font-family: var(--font-display); font-weight: 800; font-size: 18px; margin-bottom: 16px; color: var(--navy); }
+  .rt-step ul { list-style: none; }
+  .rt-step li {
     font-size: 13.5px; color: var(--ink-soft); padding: 8px 0; position: relative; padding-left: 16px;
     border-bottom: 1px solid var(--line);
   }
-  .horizon li:last-child { border-bottom: none; }
-  .horizon li::before { content: ''; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; background: var(--steel); }
+  .rt-step li:last-child { border-bottom: none; }
+  .rt-step li::before { content: ''; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; background: var(--steel); }
 
   @media (max-width: 980px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-copy { border-right: none; border-bottom: 1px solid var(--line); }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3 { grid-template-columns: 1fr 1fr; }
     .element-grid { grid-template-columns: repeat(2, 1fr); }
-    .roadmap-grid { grid-template-columns: 1fr; }
-    .roadmap .horizon { border-right: none; border-bottom: 1px solid var(--line); }
-    .roadmap .horizon:last-child { border-bottom: none; }
+    .rt-track { grid-template-columns: 1fr; gap: 28px; }
+    .rt-track::before { display: none; }
+    .tl-row, .tl-alt { justify-content: stretch; padding-left: 0; padding-right: 0; }
+    .tl-card, .tl-alt .tl-card { max-width: none; }
+    .tl-marker { display: none; }
+    .timeline::before { display: none; }
+    .myth-row { grid-template-columns: 1fr; gap: 12px; }
   }
   @media (max-width: 680px) {
     .hero { padding-top: 0; }
-    .hero-copy { padding: 40px 24px; }
-    .grid-4, .grid-3, .element-grid { grid-template-columns: 1fr; }
-    .stat-card, .uc, .element-card { border-right: none; }
+    .hero-inner { padding: 40px 24px; }
+    .hs-item { border-right: none; padding-right: 0; margin-right: 0; width: 100%; }
+    .element-grid { grid-template-columns: 1fr 1fr; }
+    .strip-item { border-right: none; flex: 1 1 100%; }
   }
 </style>

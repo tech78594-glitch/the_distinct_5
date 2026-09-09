@@ -1,8 +1,18 @@
 ---
 export interface Props {
   variant?: 'home' | 'insight';
+  /** "This Guide" footer links for insight pages. Defaults to the AI in B2B page's section ids. */
+  guideLinks?: { href: string; label: string }[];
 }
-const { variant = 'home' } = Astro.props;
+const {
+  variant = 'home',
+  guideLinks = [
+    { href: '#why-ai', label: 'Why It Matters' },
+    { href: '#usecases', label: 'Use Cases' },
+    { href: '#framework', label: 'Framework' },
+    { href: '#faq', label: 'FAQ' },
+  ],
+} = Astro.props;
 ---
 
 <footer>
@@ -50,10 +60,9 @@ const { variant = 'home' } = Astro.props;
       <nav aria-label="This guide">
         <h5>This Guide</h5>
         <ul>
-          <li><a href="#why-ai">Why It Matters</a></li>
-          <li><a href="#usecases">Use Cases</a></li>
-          <li><a href="#framework">Framework</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          {guideLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
         </ul>
       </nav>
     )}
