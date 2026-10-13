@@ -19,65 +19,33 @@ const hasMore = !showAll && newsItems.length > HOME_NEWS_LIMIT;
       <p>Latest news and practical guidance from our advisory team.</p>
     </div>
     <div id="news-container">
-      <div class="skeleton-state insight-row" style="margin-bottom: 0;">
-        <div class="ir-tag skeleton skeleton-text" style="width: 100px; height: 16px; margin: 0;"></div>
-        <div class="ir-main">
-          <div class="skeleton skeleton-text title" style="width: 70%;"></div>
-          <div class="skeleton skeleton-text"></div>
-          <div class="skeleton skeleton-text"></div>
-          <div class="skeleton skeleton-text short"></div>
-        </div>
-        <div class="ir-meta">
-          <div class="skeleton skeleton-text" style="width: 80px;"></div>
-          <div class="skeleton skeleton-text" style="width: 80px;"></div>
-          <div class="skeleton skeleton-text" style="width: 80px;"></div>
-        </div>
-        <div class="ir-arrow" aria-hidden="true" style="opacity: 0.2;">&rarr;</div>
-      </div>
-
-      <div class="real-state" style="display: none; width: 100%;">
-        {items.map((item) => (
-          <a
-            href={item.href}
-            class={item.image ? 'insight-row reveal has-bg' : 'insight-row reveal'}
-            style={item.image ? `--row-bg: url('${item.image}')` : undefined}
-          >
-            {item.image && <div class="ir-bg" aria-hidden="true"></div>}
-            <div class="ir-tag">{item.tag}</div>
-            <div class="ir-main">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-            <div class="ir-meta">
-              {item.meta.map((m) => <span>{m}</span>)}
-            </div>
-            <div class="ir-arrow" aria-hidden="true">&rarr;</div>
-          </a>
-        ))}
-
-        {(hasMore || !showAll) && (
-          <div class="insights-more reveal">
-            <a href="/news.html" class="btn btn-ghost">View All News &rarr;</a>
+      {items.map((item) => (
+        <a
+          href={item.href}
+          class={item.image ? 'insight-row reveal has-bg' : 'insight-row reveal'}
+          style={item.image ? `--row-bg: url('${item.image}')` : undefined}
+        >
+          {item.image && <div class="ir-bg" aria-hidden="true"></div>}
+          <div class="ir-tag">{item.tag}</div>
+          <div class="ir-main">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
           </div>
-        )}
-      </div>
+          <div class="ir-meta">
+            {item.meta.map((m) => <span>{m}</span>)}
+          </div>
+          <div class="ir-arrow" aria-hidden="true">&rarr;</div>
+        </a>
+      ))}
+
+      {(hasMore || !showAll) && (
+        <div class="insights-more reveal">
+          <a href="/news.html" class="btn btn-ghost">View All News &rarr;</a>
+        </div>
+      )}
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      const container = document.getElementById('news-container');
-      if (container) {
-        const skel = container.querySelector('.skeleton-state') as HTMLElement;
-        const real = container.querySelector('.real-state') as HTMLElement;
-        if (skel) skel.style.display = 'none';
-        if (real) real.style.display = 'contents';
-      }
-    }, 800);
-  });
-</script>
 
 <style>
   .insights { background: var(--paper); }

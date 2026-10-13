@@ -88,72 +88,36 @@ const rowServices: RowService[] = [
     </div>
 
     <div class="services-list" id="services-page-container">
-      <div class="skeleton-state" style="display: contents;">
-        {[1, 2, 3].map((item, i) => (
-          <article class="service-full-section" style={i % 2 === 1 ? 'flex-direction: row-reverse;' : ''}>
-            <div class="sfs-media skeleton"></div>
-            <div class="sfs-body">
-              <div class="skeleton skeleton-text" style="width: 120px; height: 16px; margin-bottom: 16px;"></div>
-              <div class="skeleton skeleton-text title" style="width: 65%; height: 32px; margin-bottom: 16px;"></div>
-              <div class="skeleton skeleton-text" style="max-width: 600px;"></div>
-              <div class="skeleton skeleton-text" style="max-width: 600px;"></div>
-              <div class="skeleton skeleton-text short" style="margin-bottom: 24px;"></div>
-              <ul class="feat" style="display: grid; gap: 12px; margin-top: 10px;">
-                <li class="skeleton skeleton-text" style="width: 90%;"></li>
-                <li class="skeleton skeleton-text" style="width: 80%;"></li>
-                <li class="skeleton skeleton-text" style="width: 85%;"></li>
-              </ul>
+      {[...featureServices, ...rowServices.map(s => ({...s, tag: 'Core Service'}))].map((service) => (
+        <article class="service-full-section reveal">
+          {service.image && (
+            <div class="sfs-media">
+              <img
+                src={service.image}
+                alt={service.title}
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="450"
+              />
             </div>
-          </article>
-        ))}
-      </div>
-
-      <div class="real-state" style="display: none;">
-        {[...featureServices, ...rowServices.map(s => ({...s, tag: 'Core Service'}))].map((service, index) => (
-          <article class="service-full-section reveal">
-            {service.image && (
-              <div class="sfs-media">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  loading="lazy" 
-                  decoding="async" 
-                  width="800" 
-                  height="450" 
-                />
-              </div>
-            )}
-            <div class="sfs-body">
-              <span class="sfs-num">
-                <span class="sfs-icon" set:html={service.icon} />
-                {service.tag || 'Core Service'}
-              </span>
-              <h2>{service.title}</h2>
-              <p>{service.description}</p>
-              <ul class="feat">
-                {service.features.map((f) => <li>{f}</li>)}
-              </ul>
-            </div>
-          </article>
-        ))}
-      </div>
+          )}
+          <div class="sfs-body">
+            <span class="sfs-num">
+              <span class="sfs-icon" set:html={service.icon} />
+              {service.tag || 'Core Service'}
+            </span>
+            <h2>{service.title}</h2>
+            <p>{service.description}</p>
+            <ul class="feat">
+              {service.features.map((f) => <li>{f}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      const container = document.getElementById('services-page-container');
-      if (container) {
-        const skel = container.querySelector('.skeleton-state') as HTMLElement;
-        const real = container.querySelector('.real-state') as HTMLElement;
-        if (skel) skel.style.display = 'none';
-        if (real) real.style.display = 'contents';
-      }
-    }, 800);
-  });
-</script>
 
 <style>
   .services { background: var(--paper); padding-top: 60px; }

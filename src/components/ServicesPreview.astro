@@ -51,70 +51,34 @@ const featureServices: FeatureService[] = [
     </div>
 
     <div class="feature-grid stagger" id="services-preview-container">
-      <div class="skeleton-state" style="display: contents;">
-        {[1, 2].map(() => (
-          <article class="service-feature">
-            <div class="sf-media skeleton"></div>
-            <div class="sf-body">
-              <div class="skeleton skeleton-text" style="width: 100px; height: 16px; margin-bottom: 12px;"></div>
-              <div class="skeleton skeleton-text title" style="width: 80%;"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text short"></div>
-              <ul class="feat" style="margin-top: 16px; display: grid; gap: 8px;">
-                <li class="skeleton skeleton-text" style="width: 90%;"></li>
-                <li class="skeleton skeleton-text" style="width: 70%;"></li>
-                <li class="skeleton skeleton-text" style="width: 85%;"></li>
-              </ul>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <div class="real-state" style="display: none;">
-        {featureServices.map((service) => (
-          <article class="service-feature reveal">
-            <div class="sf-media">
-              <img 
-                src={service.image} 
-                alt={service.title} 
-                loading="lazy" 
-                decoding="async" 
-                width="600" 
-                height="338" 
-              />
-            </div>
-            <div class="sf-body">
-              <span class="sf-num">
-                <span class="sf-icon" set:html={service.icon} />
-                {service.num} &middot; {service.tag}
-              </span>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              <ul class="feat">
-                {service.features.map((f) => <li>{f}</li>)}
-              </ul>
-            </div>
-          </article>
-        ))}
-      </div>
+      {featureServices.map((service) => (
+        <article class="service-feature reveal">
+          <div class="sf-media">
+            <img
+              src={service.image}
+              alt={service.title}
+              loading="lazy"
+              decoding="async"
+              width="600"
+              height="338"
+            />
+          </div>
+          <div class="sf-body">
+            <span class="sf-num">
+              <span class="sf-icon" set:html={service.icon} />
+              {service.num} &middot; {service.tag}
+            </span>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <ul class="feat">
+              {service.features.map((f) => <li>{f}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      const container = document.getElementById('services-preview-container');
-      if (container) {
-        const skel = container.querySelector('.skeleton-state') as HTMLElement;
-        const real = container.querySelector('.real-state') as HTMLElement;
-        if (skel) skel.style.display = 'none';
-        if (real) real.style.display = 'contents';
-      }
-    }, 800);
-  });
-</script>
 
 <style>
   .services { background: var(--white); }

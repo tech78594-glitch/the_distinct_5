@@ -20,7 +20,7 @@ const steps = [
       {steps.map((step, index) => (
         <article class={`step-row reveal ${index % 2 !== 0 ? 'reverse' : ''}`}>
           <div class="step-media">
-            <img src={step.image} alt={step.title} loading="lazy" decoding="async" />
+            <img src={step.image} alt={step.title} loading="lazy" decoding="async" width="800" height="450" />
           </div>
           <div class="step-content">
             <span class="step-n">{step.n}</span>

@@ -12,7 +12,7 @@
  *      — also never a DOM text node, and non-selectable.
  *
  * For stronger protection, replace this module with a fetch to a rate-limited
- * serverless endpoint. `public/contact.json` documents the plain data contract
+ * serverless endpoint. `public/contacts.json` documents the plain data contract
  * for that future endpoint and is intentionally public.
  *
  * IMPORTANT: if these values ever need to change, decode the new plaintext

@@ -61,6 +61,9 @@ export function initContactProtect(): void {
   const hoursEl = document.getElementById('ci-hours');
   if (hoursEl) hoursEl.textContent = hoursText;
 
-  // Disable right-click within the contact section
-  document.getElementById('contact')?.addEventListener('contextmenu', (e) => e.preventDefault());
+  // Note: right-click was previously disabled site-wide within #contact as
+  // a fourth scraping deterrent. Removed — it mostly punished legitimate
+  // visitors (no inspect/copy in that section) while doing little against
+  // scraping, which the XOR + canvas + CSS attr() layers above already
+  // handle.
 }

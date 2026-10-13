@@ -35,7 +35,7 @@ const canonicalUrl = new URL(path, Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -72,7 +72,7 @@ const canonicalUrl = new URL(path, Astro.site).toString();
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Distinct 5" />
     <link rel="apple-touch-icon" href="/images/company_logo.png" />
-    <link rel="icon" href="/images/company_logo.png" type="image/x-icon" />
+    <link rel="icon" href="/images/company_logo.png" type="image/png" />
     <meta name="description" content={description} />
     <meta name="author" content="THE DISTINCT 5 Ltd" />
     <meta name="keywords" content="business consultancy, advisory, ai in b2b, digital transformation, strategy, fractional executive" />
@@ -96,6 +96,7 @@ const canonicalUrl = new URL(path, Astro.site).toString();
       rel="stylesheet"
     />
     <script is:inline>
+      document.documentElement.classList.remove('no-js');
       const theme = localStorage.getItem('theme');
       if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
@@ -107,7 +108,7 @@ const canonicalUrl = new URL(path, Astro.site).toString();
     <a href="#main" class="skip-link">Skip to content</a>
     <div class="progress" id="progress" aria-hidden="true"></div>
 
-    <UtilityBar contactHref={activeNav === 'ai-in-b2b' ? '/index.html#contact' : '#contact'} />
+    <UtilityBar contactHref={activeNav === null ? '#contact' : '/index.html#contact'} />
     <Header activeNav={activeNav} />
     <MobileMenu activeNav={activeNav} />
 
@@ -120,7 +121,7 @@ const canonicalUrl = new URL(path, Astro.site).toString();
 
     <div id="offline-indicator" style="display: none; position: fixed; bottom: 16px; left: 16px; z-index: 9999; background: #eab308; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
       <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; display: inline-block; animation: pulse 2s infinite;"></span>
-      Offline Mode — Cached data
+      You're offline — some content may not load
     </div>
 
     <script>
@@ -129,10 +130,19 @@ const canonicalUrl = new URL(path, Astro.site).toString();
       import { initFaq } from '../scripts/faq';
       import { initTilt } from '../scripts/tilt';
 
-      initNav();
-      initReveal();
-      initFaq();
-      initTilt();
+      // Each init is independent UI wiring (nav, scroll-reveal, FAQ
+      // accordion, tilt effect) - run them isolated so one throwing
+      // doesn't stop the rest from initializing. initReveal() in
+      // particular is responsible for making most page content visible
+      // (see .reveal/.reveal.in in global.css), so it must never be
+      // skipped just because an earlier init failed.
+      for (const init of [initNav, initReveal, initFaq, initTilt]) {
+        try {
+          init();
+        } catch (err) {
+          console.error('[init] a page script failed to initialize:', err);
+        }
+      }
 
       // Offline indicator logic
       const offlineIndicator = document.getElementById('offline-indicator');
