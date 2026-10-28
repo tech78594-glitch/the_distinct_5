@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhoWeAre from '../components/WhoWeAre.astro';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Who We Are | THE DISTINCT 5 Ltd',
+  url: 'https://thedistinct5ltd.com/who-we-are.html',
+  description: 'The team, vision and mission behind THE DISTINCT 5 Ltd the advisory partner bringing clarity, strategy and measurable growth to ambitious businesses.',
+});
+---
+
+<BaseLayout
+  title="Who We Are | THE DISTINCT 5 Ltd"
+  description="The team, vision and mission behind THE DISTINCT 5 Ltd the advisory partner bringing clarity, strategy and measurable growth to ambitious businesses."
+  path="/who-we-are.html"
+  jsonLd={jsonLd}
+  activeNav="about"
+>
+  <WhoWeAre />
+</BaseLayout>
