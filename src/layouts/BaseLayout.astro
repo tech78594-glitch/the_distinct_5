@@ -108,7 +108,7 @@ const canonicalUrl = new URL(path, Astro.site).toString();
     <a href="#main" class="skip-link">Skip to content</a>
     <div class="progress" id="progress" aria-hidden="true"></div>
 
-    <UtilityBar contactHref={activeNav === null ? '#contact' : '/index.html#contact'} />
+    <UtilityBar contactHref={activeNav === 'home' ? '#contact' : '/index.html#contact'} />
     <Header activeNav={activeNav} />
     <MobileMenu activeNav={activeNav} />
 
