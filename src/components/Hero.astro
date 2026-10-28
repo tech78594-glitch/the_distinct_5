@@ -16,14 +16,14 @@
   </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">Business Consultancy &amp; Advisory</span>
-      <h1>Clarity. Strategy.<br />Measurable Growth.</h1>
-      <p>
+      <span class="eyebrow hero-in" style="animation-delay: 0.05s;">Business Consultancy &amp; Advisory</span>
+      <h1 class="hero-in" style="animation-delay: 0.15s;">Clarity. Strategy.<br />Measurable Growth.</h1>
+      <p class="hero-in" style="animation-delay: 0.28s;">
         THE DISTINCT 5 Ltd partners with ambitious businesses and individuals to solve problems, sharpen
         strategy, and unlock sustainable performance across the boardroom, the balance sheet,
         and the build.
       </p>
-      <div class="hero-cta">
+      <div class="hero-cta hero-in" style="animation-delay: 0.4s;">
         <a href="#services" class="btn btn-primary">Explore Services &rarr;</a>
         <a href="#contact" class="btn btn-ghost">Schedule Consultation</a>
       </div>
@@ -44,6 +44,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
+    animation: heroBgIn 1.6s ease-out both;
   }
   .hero-bg img {
     width: 100%;
@@ -55,6 +56,8 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(100deg, rgba(8, 15, 28, 0.92) 0%, rgba(8, 15, 28, 0.78) 42%, rgba(8, 15, 28, 0.35) 100%);
+    opacity: 0;
+    animation: heroOverlayIn 1s ease-out 0.1s both;
   }
 
   .hero-grid {
@@ -78,6 +81,31 @@
   .hero-cta .btn-primary:hover { background: #e7ecf2; }
   .hero-cta .btn-ghost { color: #fff; border: 1px solid rgba(255, 255, 255, 0.55); }
   .hero-cta .btn-ghost:hover { border-color: #fff; background: rgba(255, 255, 255, 0.1); }
+
+  .hero-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes heroFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroOverlayIn {
+    to { opacity: 1; }
+  }
+  @keyframes heroBgIn {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg, .hero-bg-overlay, .hero-in {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 
   @media (max-width: 680px) {
     .hero { padding-top: 0; }
